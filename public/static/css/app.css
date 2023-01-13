@@ -1,0 +1,100 @@
+#marginT-nav {
+    background-color: #efeded;
+    padding-top: 1rem;
+}
+
+.mt-3 {
+    margin-top: -8px !important;
+}
+
+.bg-dark {
+    background-color: #191970 !important;
+}
+
+nav {
+    padding: 0px !important;
+}
+
+.nav-link {
+    width: 71px;
+}
+
+.longs {
+    width: 146px;
+}
+
+.collapse {
+    position: relative;
+    right: 34.5rem;
+}
+
+#position1 {
+    width: 104px;
+}
+
+#position2 {
+    width: 121px;
+}
+
+#position3 {
+    width: 205px;
+}
+
+#position4 {
+    width: 116px;
+}
+
+.logo {
+    position: absolute;
+    left: 112px;
+    width: 187px;
+    bottom: 0px;
+}
+
+.nav-link:hover {
+    background-color: #b6a886;
+}
+
+.position {
+    text-align: center;
+}
+
+#position {
+    width: 104px;
+}
+
+
+/*format tablette*/
+@media screen and (max-device-width: 1100px) {
+    .navbar-toggler {
+        position: relative;
+        left: 32rem;
+        background-color: #b6a886
+
+    }
+
+    .position {
+        float: right;
+    }
+
+    .collapse {
+        right: 0rem;
+    }
+}
+
+/*format tel*/
+@media screen and (max-device-width: 700px) {
+    #marginT-nav {
+        width: 580px;
+    }
+
+    .navbar {
+        width: 580px;
+    }
+
+    .navbar-toggler {
+        left: 29rem;
+    }
+}
+
+
