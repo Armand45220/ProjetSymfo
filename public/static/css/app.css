@@ -1,3 +1,12 @@
+
+/* MAIN */
+main {
+    display: flex;
+    flex-direction: row;
+    width: auto;
+}
+
+/* navbar */
 #marginT-nav {
     background-color: #efeded;
     padding-top: 1rem;
@@ -96,5 +105,160 @@ nav {
         left: 29rem;
     }
 }
+/* section gauche */
 
+.left-section{
+    width: 20%;
+    margin: 5% 0 5% 5%;
+}
 
+/* sondage */
+
+.survey-head{
+    background-color: #191970;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    margin-left: 2px;
+    margin-right: 2px;
+}
+
+.survey-head h2{
+    color: white;
+    text-align: center;
+    font-weight: lighter;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
+
+}
+
+.selection{
+    background-color:rgb(227, 227, 227);
+    margin-left: 2px;
+    margin-right: 2px;
+    
+}
+
+.survey-validation{
+    display: flex;
+    justify-content: center;
+    background-color: #191970;
+    margin-left: 2px;
+    margin-right: 2px;
+}
+
+.survey-validation div{
+    margin: 5px 20px 5px 20px;
+
+}
+
+/* Accès rapide */
+
+.quick-access{
+    background-color:rgb(227, 227, 227);
+    padding: 9px;
+    margin-top: 10px;
+    margin-right: 2px;
+    margin-left: 2px;
+    
+}
+
+.quick-access h2{
+    font-weight: lighter;
+    color: goldenrod;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
+}
+
+/* Informations de contact */
+
+.contact-inf{
+    background-color:rgb(227, 227, 227);
+    padding: 9px;
+    margin-top: 10px;
+    margin-right: 2px;
+    margin-left: 2px;
+    
+}
+
+.contact-inf h2{
+    font-weight: lighter;
+    color: goldenrod;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
+}
+
+/* Carousel partenaires */
+
+.carousel-inner{
+    height: 150px;
+}
+
+.carousel-item img{
+    vertical-align: middle;
+    width: 43%;
+    margin-left: 23%;
+}
+
+/* FOOTER */
+
+.img-footer img{
+    margin-top: 35px;
+}
+
+.footer{
+    display: flex;
+    justify-content: space-around;
+    background-color: rgb(255, 172, 72);
+    padding-bottom: 30px;
+}
+
+.footer h3{
+    color: white;
+}
+.footer p{
+    color: white;
+}
+
+.footer-element-flex{
+    display: flex;
+    justify-content: baseline;
+}
+
+.footer-element{
+    display: flex;
+    flex-direction: column;
+}
+
+.footer-element a{
+    margin-top: 15px;
+}
+
+.foot-marg{
+    margin-right: 25px;
+}
+
+.mail-footer{
+    display: flex;
+    justify-content: baseline;
+}
+
+.button-footer button{
+    height: 47px;
+    margin-left: 12px;
+    border-radius: 15px;
+}
+
+.input-footer input{
+    border-radius: 24px;
+}
+
+@media screen and (max-width: 660px){
+    .footer{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+/* right section */
+
+.right-section{
+    margin-top: 5%;
+}
