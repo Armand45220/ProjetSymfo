@@ -1,39 +1,41 @@
 <section class="left-section">
     <!-- Sondage -->
     <div class="survey">
-        <div class="survey-head">
+        <div id="survey-head" class="survey-general">
             <h2> Votre avis compte </h2>
         </div>
         <!-- champ de sélection -->
-        <fieldset class="selection">
-            <p> Pour quel parc d'attraction souhaiteriez-vous obtenir des prix ?</p>
-            <div>
-                <input type="radio" id="option1" name="opt" value="option1">
-                <label for="option1">Réponse A</label>
-            </div>
-            <div>
-                <input type="radio" id="option2" name="opt" value="option2">
-                <label for="option2">Réponse B</label>
-            </div>
-            <div>
-                <input type="radio" id="option3" name="opt" value="option3">
-                <label for="option3">Réponse C</label>
-            </div>
-        </fieldset>
+        <div id="selection">
+            <fieldsetid  class="survey-general">
+                <p id="font-center"> Pour quel parc d'attraction souhaiteriez-vous obtenir des prix ?</p>
+                <div class="center">
+                    <input type="radio" id="option1" name="opt" value="option1">
+                    <label for="option1">Réponse A</label>
+                </div>
+                <div class="center">
+                    <input type="radio" id="option2" name="opt" value="option2">
+                    <label for="option2">Réponse B</label>
+                </div>
+                <div class="center">
+                    <input type="radio" id="option3" name="opt" value="option3">
+                    <label for="option3">Réponse C</label>
+                </div>
+            </fieldsetid>
+        </div>
         <!-- bouton validation sondage -->
-        <div class="survey-validation">
+        <div id="survey-validation" class="main-flex survey-general">
             <div class="view-answer">
                 <button name="view">Voir les réponses</button>
             </div>
             <div class="validate-answer">
-                <button name="validate">Valider</button>
+                <button id="heightValidate" name="validate">Valider</button>
             </div>
         </div>
     </div>
 
     <!-- Accès rapide -->
-    <div class="quick-access">
-        <h2>Accès rapide</h2>
+    <div id="quick-access" class="padding survey-general">
+        <h2 class="colorAccess">Accès rapide</h2>
         <div>
             <p> > Offres permanentes / Billetterie</p>
             <p> > Nous contacter
@@ -41,38 +43,42 @@
     </div>
 
         <!-- Information de contact -->
-    <div class="contact-inf">
-        <h2>Informations de contact</h2>
+    <div id="contact-inf" class="padding survey-general">
+        <h2 id="colorFont" class="colorAccess">Informations de contact</h2>
         <div>
-            <p> > Par téléphone: +33303030303</p>
-            <p> > Par email : <a href="mailto:email@exemple.com">cse@lyceestvincent.fr</a></p>
-            <p> > Au lycée : Bureau du CSE (1er étage bâtiment Saint-Vincent)</p>
+            <p> > Par téléphone: <a class="blue antislash" href="telto:+33303030303"> +33303030303</a></p>
+            <p> > Par email : <a class="blue antislash" href="mailto:email@exemple.com">cse@lyceestvincent.fr</a></p>
+            <p  id="floatL"> > Au lycée : <p class="blue">Bureau du CSE (1er étage bâtiment Saint-Vincent)</p></p>
         </div>
     </div>
 
         <!-- Carousel partenaires -->
     <div class="collab-carousel">
-        <h2>Nos partenaires</h2>
-        <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
-                <div class="carousel-item active" data-bs-interval="10000">
-                    <img src={{asset('css/images/bootstrap-logo.png')}} width="250px" alt="ERROR">
-                </div>
-                <div class="carousel-item" data-bs-interval="2000">
-                    <img src={{asset('css/images/csslogo.png')}} width="250px" alt="ERROR">
-                </div>
-                <div class="carousel-item">
-                    <img src={{asset('css/images/clogo.png')}} width="250px" alt="ERROR">
+        <h2 class="colorAccess">Nos partenaires</h2>
+        <div id="fondCarrousel">
+            <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active" data-bs-interval="10000">
+                        <img src={{asset('css/images/bootstrap-logo.png')}} width="250px" alt="ERROR">
+                    </div>
+                    <div class="carousel-item" data-bs-interval="2000">
+                        <img src={{asset('css/images/csslogo.png')}} width="250px" alt="ERROR">
+                    </div>
+                    <div class="carousel-item">
+                        <img src={{asset('css/images/clogo.png')}} width="250px" alt="ERROR">
+                    </div>
                 </div>
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+        </div>
+            <button class="carouselPosition carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Previous</span>
             </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+            <button id="carouselResponsive" class="carouselPosition carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Next</span>
             </button>
-            <a href="#" class="linkcollab"> Decouvrir tous nos partenaires </a>
-        </div>     
+            <a href="#" colorCollab class="colorCollab linkcollab"> Decouvrir tous nos partenaires </a>
+        </div>
+    </div>
 </section>

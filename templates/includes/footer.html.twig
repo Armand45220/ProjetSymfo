@@ -1,5 +1,5 @@
 <!-- footer -->
-<section class="footer">
+<section id="footer" class="main-flex">
     <!-- image saint vincent -->
     <div class="img-footer">
         <img src={{asset('css/images/stv.png')}}>
@@ -8,14 +8,14 @@
     <div  class="middle-footer">
         <h3> CSE Lycée Saint-Vincent</h3>
 
-        <div class="footer-element-flex">
-            <div class="footer-element foot-marg">
-                <a href="#"> > Partenariats </a>
-                <a href="#"> > A propos de nous </a>
+        <div class="main-flex footer-element-flex">
+            <div id="footer-element" class="main-flex foot-marg">
+                <a class="linkPageColor antislash" href="#"> > Partenariats </a>
+                <a class="linkPageColor antislash" href="#"> > A propos de nous </a>
             </div>
-            <div class="footer-element">
-                <a href="#"> > Billetterie </a>
-                <a href="#"> > Contact </a>
+            <div id="footer-element" class="main-flex">
+                <a class="linkPageColor antislash" href="#"> > Billetterie </a>
+                <a class="linkPageColor antislash" href="#"> > Contact </a>
             </div>
         </div>
     </div> 
@@ -23,11 +23,11 @@
     <div class="footer-form">
         <h3> Inscrivez-vous aux offres </h3><br>
         <p>Recevez un email à chaque nouvelle offre sur le site internet </p>
-        <div class="mail-footer">
+        <div class="main-flex footer-element-flex">
             <div class="input-footer">
                 <form action="" method="POST">
                     <input type="text"  class="form-control form-control-lg" placeholder="E-mail" name="email" required>
-                <form>
+                </form>
             </div>
             <div class="button-footer">
                 <button name="sendmailfooter">S'inscrire</button>
