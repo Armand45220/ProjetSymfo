@@ -283,3 +283,66 @@ nav {
         align-items: center;
     }
 }
+
+
+
+
+/* PARTENAIRES */
+
+.part_right{
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    margin-left: 30px;
+    width: 220px;
+    max-height: 25%;
+
+}
+
+.img_part{
+    width:100%;
+    max-height: 130px;
+    min-height: 130px;
+    background-size: cover;
+}
+
+.part_flex{
+    display: flex;
+    flex-wrap: wrap;
+    height: fit-content;
+}
+
+.partenaire{
+    width: 100%;
+    background-color: rgb(237, 237, 237);
+    padding: 10px;
+    min-height: 250px;
+}
+
+.title_part{
+    text-align: center;
+}
+
+.partenaire h2 {
+    text-align: center;
+}
+
+.btn_part{
+    margin-left: 20%;
+    background-color: goldenrod;
+}
+
+.modal-header, .modal-footer{
+    background-color: #191970;
+}
+
+.modal-header h5{
+    color: white;
+    font-weight: bolder;
+    font-size: 35px;
+    text-decoration: underline;
+}
+
+.modal-footer button{
+    background-color: goldenrod;;
+}
