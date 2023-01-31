@@ -40,7 +40,7 @@ class FichierRepository extends ServiceEntityRepository
     }
 
 //    /**
-//     * @return Fichier[] Returns an array of Fichier objects
+//     * @return Files[] Returns an array of Files objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -54,7 +54,7 @@ class FichierRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?Fichier
+//    public function findOneBySomeField($value): ?Files
 //    {
 //        return $this->createQueryBuilder('f')
 //            ->andWhere('f.exampleField = :val')

@@ -2,26 +2,26 @@
 
 namespace App\Repository;
 
-use App\Entity\Admin;
+use App\Entity\Action;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Admin>
+ * @extends ServiceEntityRepository<Action>
  *
- * @method Admin|null find($id, $lockMode = null, $lockVersion = null)
- * @method Admin|null findOneBy(array $criteria, array $orderBy = null)
- * @method Admin[]    findAll()
- * @method Admin[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Action|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Action|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Action[]    findAll()
+ * @method Action[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class AdminRepository extends ServiceEntityRepository
+class ActionRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Admin::class);
+        parent::__construct($registry, Action::class);
     }
 
-    public function save(Admin $entity, bool $flush = false): void
+    public function save(Action $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -30,7 +30,7 @@ class AdminRepository extends ServiceEntityRepository
         }
     }
 
-    public function remove(Admin $entity, bool $flush = false): void
+    public function remove(Action $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
 
@@ -40,7 +40,7 @@ class AdminRepository extends ServiceEntityRepository
     }
 
 //    /**
-//     * @return Admin[] Returns an array of Admin objects
+//     * @return Action[] Returns an array of Action objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -54,7 +54,7 @@ class AdminRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?Admin
+//    public function findOneBySomeField($value): ?Action
 //    {
 //        return $this->createQueryBuilder('a')
 //            ->andWhere('a.exampleField = :val')
