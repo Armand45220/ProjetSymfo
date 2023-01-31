@@ -26,6 +26,9 @@ class Fichier
     #[ORM\OneToMany(mappedBy: 'Fichier', targetEntity:'App\Entity\Partenaire')]
     private $partenaires;
 
+    #[ORM\OneToMany(mappedBy:"Fichier", targetEntity:'App\Entity\Offre')]
+    private $fichierOffre;
+
     public function __construct()
     {
         $this->partenaires = new ArrayCollection();
@@ -64,4 +67,10 @@ class Fichier
     {
         return $this->partenaires;
     }
+
+    public function getFichierOffre(): Collection
+    {
+        return $this->fichierOffre;
+    }
+
 }
