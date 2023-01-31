@@ -1,12 +1,14 @@
 {% extends 'base.html.twig' %}
 
 {% block content_right %}
+<section id="recentrer">
+    <h2 class="center">Partenaires</h2>
     <div class="part_flex">
         {% for partenaire in partenaire %}
             <div class="right-section part_right">
                 <div class="partenaire">
-                    <img src= {{ asset ( partenaire.fichier.chemin_fichier ) }}  alt="Mon image" class="img_part">
-                    <h2>{{ partenaire.nom_part }}</h2>
+                    <img src= "{{ asset ( partenaire.fichier.cheminFichier ) }}"  alt="Mon image" class="img_part">
+                    <h3 class="center FS">{{ partenaire.nom_part }}</h3>
                     <button type="button" class="btn btn-warning btn_part" data-bs-toggle="modal" data-bs-target="#modalPart-{{partenaire.id}}">En savoir plus</button>
 
                     <!-- Modal affichant la description des partenaires -->
@@ -31,4 +33,5 @@
             </div>
         {% endfor %}
     </div>
+</section>
 {% endblock %}
