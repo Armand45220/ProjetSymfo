@@ -1,9 +1,10 @@
-<div id="marginT-nav">&nbsp;</div>
+
+    <div id="marginT-nav">&nbsp;</div>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid bg">
             <div class="w-100">
                 <img src="{{ asset('static/img/Logo_St_Vincent_1.png') }}" class="logo
-            ms-4" width="60" alt="Logo st-vincent">
+             ms-4" width="60" alt="Logo st-vincent">
             </div>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02"
                     aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
@@ -12,16 +13,16 @@
             <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a  href={{ path('home')}} id="position1" class="nav-link position text-light">Accueil</a>
+                        <a id="position1" class="nav-link position text-light">Accueil</a>
                     </li>
                     <li class="nav-item">
-                        <a  href={{ path('app_partenaire')}} id="position2" class="nav-link position text-light">Partenariats</a>
+                        <a id="position2" href="{{path('app_partenaire')}}" class="nav-link position text-light">Partenariats</a>
                     </li>
                     <li class="nav-item">
-                        <a id="position3" class="longs nav-link position text-light">A propos de nous</a>
+                        <a id="position3" href="{{path('app_apropos')}}" class="longs nav-link position text-light">A propos de nous</a>
                     </li>
                     <li class="nav-item">
-                        <a id="position4" class="nav-link position text-light">Billeterie</a>
+                        <a id="position4" class="nav-link position text-light">Billetterie</a>
                     </li>
                     <li class="nav-item">
                         <a id="position" class="nav-link position text-light">Contact</a>
@@ -30,3 +31,4 @@
             </div>
         </div>
     </nav>
+
