@@ -7,7 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use App\Entity\Partenaire;
+use App\Entity\Membre;
 
 #[ORM\Entity(repositoryClass: FichierRepository::class)]
 class Fichier
@@ -21,18 +21,23 @@ class Fichier
     private ?string $nomFichier = null;
 
     #[ORM\Column(length: 255)]
+
     private ?string $cheminFichier = null;
     
     #[ORM\OneToMany(mappedBy: 'Fichier', targetEntity:'App\Entity\Partenaire')]
     private $partenaires;
 
-    #[ORM\OneToMany(mappedBy:"Fichier", targetEntity:'App\Entity\Offre')]
-    private $fichierOffre;
+
+    #[ORM\OneToMany(mappedBy: 'Fichier', targetEntity: 'App\Entity\Membre')]
+
+    private $membres;
 
     public function __construct()
     {
+        $this->membres = new ArrayCollection();
         $this->partenaires = new ArrayCollection();
     }
+
 
     public function getId(): ?int
     {
@@ -62,11 +67,14 @@ class Fichier
 
         return $this;
     }
-
+    public function getMembres(): Collection
+    {
+        return $this->membres;
+    }
     public function getPartenaires(): Collection
     {
         return $this->partenaires;
     }
-
-
 }
+
+?>

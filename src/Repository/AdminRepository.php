@@ -27,10 +27,7 @@ class AdminRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Admin::class);
         parent::__construct($registry, Offre::class);
-
     }
-
-
 
 
     public function save(Admin $entity, bool $flush = false): void
@@ -101,3 +98,5 @@ class AdminRepository extends ServiceEntityRepository
 //        ;
 //    }
 }
+
+?>
