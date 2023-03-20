@@ -15,13 +15,13 @@ class Fichier
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $id_fichier = null;
+    private ?int $idFichier = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $nom_fichier = null;
+    private ?string $nomFichier = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $chemin_fichier = null;
+    private ?string $cheminFichier = null;
     
     #[ORM\OneToMany(mappedBy: 'Fichier', targetEntity:'App\Entity\Partenaire')]
     private $partenaires;
@@ -36,29 +36,29 @@ class Fichier
 
     public function getId(): ?int
     {
-        return $this->id_fichier;
+        return $this->idFichier;
     }
 
     public function getNomFichier(): ?string
     {
-        return $this->nom_fichier;
+        return $this->nomFichier;
     }
 
-    public function setNomFichier(string $nom_fichier): self
+    public function setNomFichier(string $nomFichier): self
     {
-        $this->nom_fichier = $nom_fichier;
+        $this->nomFichier = $nomFichier;
 
         return $this;
     }
 
-    public function getChemin_fichier(): ?string
+    public function getCheminFichier(): ?string
     {
-        return $this->chemin_fichier;
+        return $this->cheminFichier;
     }
 
-    public function setCheminFichier(string $chemin_fichier): self
+    public function setCheminFichier(string $cheminFichier): self
     {
-        $this->chemin_fichier = $chemin_fichier;
+        $this->cheminFichier = $cheminFichier;
 
         return $this;
     }
@@ -68,9 +68,5 @@ class Fichier
         return $this->partenaires;
     }
 
-    public function getFichierOffre(): Collection
-    {
-        return $this->fichierOffre;
-    }
 
 }

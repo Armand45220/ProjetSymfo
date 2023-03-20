@@ -43,3 +43,5 @@ class Question
         return $this->reponses;
     }
 }
+
+?>

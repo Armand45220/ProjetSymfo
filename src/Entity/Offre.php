@@ -43,6 +43,12 @@ class Offre
     #[ORM\OneToMany(targetEntity:"FichierOffre", mappedBy:"Offre")]
     private $fichierOffre;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $nb_places_min = null;
+
+    #[ORM\Column(type: Types::SMALLINT)]
+    private ?int $type_offre = null;
+
     public function getId(): ?int
     {
         return $this->id_offre;
@@ -147,6 +153,30 @@ class Offre
     public function getFichierOffre(): Collection
     {
         return $this->fichierOffre;
+    }
+
+    public function getNbPlacesMin(): ?int
+    {
+        return $this->nb_places_min;
+    }
+
+    public function setNbPlacesMin(?int $nb_places_min): self
+    {
+        $this->nb_places_min = $nb_places_min;
+
+        return $this;
+    }
+
+    public function getTypeOffre(): ?int
+    {
+        return $this->type_offre;
+    }
+
+    public function setTypeOffre(int $type_offre): self
+    {
+        $this->type_offre = $type_offre;
+
+        return $this;
     }
 
 }

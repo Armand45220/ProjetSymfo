@@ -11,12 +11,12 @@ class Reponse
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $id_rep = null;
+    private int $id_rep;
 
     #[ORM\Column(length: 255)]
     private ?string $libelle_rep = null;
 
-    #[ORM\Column]
+    #[ORM\Column (nullable: true)]
     private ?int $nb_rep = null;
 
     #[ORM\ManyToOne(targetEntity:"App\Entity\Question", inversedBy:"Reponse")]
@@ -64,3 +64,4 @@ class Reponse
         return $this;
     }
 }
+?>

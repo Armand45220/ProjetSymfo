@@ -162,6 +162,7 @@ main {
 
 .right-section{
     margin-top: 5%;
+    width: 75%;
 }
 
 /* navbar */
@@ -346,3 +347,409 @@ nav {
 .modal-footer button{
     background-color: goldenrod;;
 }
+
+/* BILLETTERIE */
+
+.offerTitle{
+    text-align: center;
+    font-size: 65px;
+    font-weight: lighter;
+    color:  #191970;
+}
+
+.offer_menu{
+    text-align: center;
+}
+
+.top_content_offer, .bottom_content_offer{
+    display: flex;
+    justify-content: space-between;
+}
+
+.offer_content p{
+    font-size: 85%;
+}
+
+.type_offer{
+    background-color: #191970;
+    color: white;
+    border-radius: 20px;
+    padding-left: 8px;
+    padding-right: 8px;
+    margin: 2px;
+}
+
+.offer_content{
+    background-color: rgb(230, 230, 230);
+    width: 90%;
+    margin-left: 5%;
+    padding: 8px;
+    border: solid 2px black;
+    border-radius: 20px;
+    margin-top: 30px;
+}
+
+.o_sel{
+    color: #191970;
+}
+
+.o_aff{
+    color: goldenrod;
+    text-decoration: underline;
+}
+
+.o_sel:hover{
+    color: goldenrod;
+    transition-duration: 0.2s;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.pagination a {
+    color: #333;
+    font-weight: bold;
+    padding: 6px 12px;
+    text-decoration: none;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    margin-right: 5px;
+}  
+
+/* PAGE D'ACCUEIL */
+.homedesc{
+    margin: 0 5% 0 5%;
+    text-align: center;
+}
+
+/* FORMULAIRE CONNEXION */
+
+.formadmin{
+    width: 70%;
+    margin-left: 15%;
+    margin-right: 15%;
+    border: 2px solid black;
+    border-radius: 20px;
+    padding: 40px;
+}
+
+.formadmin h1{
+    text-align: center;
+    color: #191970;
+    font-weight: lighter;
+    font-size: 50px;
+}
+
+.formadmin button{
+    margin-top: 40px;;
+    background-color: darkblue;
+    width: 100%;
+    color: white;
+}
+
+.formadmin button:hover{
+    background-color: goldenrod;
+    transition-duration: 0.3s;
+}
+
+/* BACKOFFICE */
+.logoutbutton{
+    width: 105%;
+    margin-left: -8px;
+    height: 50px;
+    background-color: #191970;
+    color: goldenrod;
+    font-size: 20px;
+    bottom: 0px;
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.logoutbutton:hover{
+    text-decoration :underline;
+}
+.botitle h1{
+    text-align: center;
+    margin: 50px;
+    color: #191970;
+    font-weight: lighter;
+}
+
+.AdmPath{
+    margin: 30px 0 10px 0;
+    width: 400px;
+    border: 1px solid black;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.AdmPath:hover{
+    text-decoration: underline;
+    background-color: #191970;
+    color: goldenrod;
+}
+
+.admin-menu{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.admin-menu a{
+    font-size: 20px;
+    text-decoration: none;
+}
+
+/* form d'ajout d'offre */
+#offrep #offrep_type_offre{
+    display: block;
+}
+
+.o_title {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-top: 50px;
+}
+
+/* Style pour le formulaire */
+.add-offer-form {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Style pour les champs de formulaire */
+.add-offer-form input[type="text"], .add-offer-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+}
+
+#offrep_date_debut_val, #offrep_date_fin_val, #offrep_date_debut_aff, #offrep_date_fin_aff{
+display: flex;
+flex-wrap: wrap;
+align-items: center;
+}
+
+#offrep_date_debut_val .classePerm, #offrep_date_fin_val .classePerm, #offrep_date_debut_aff .classeLim, #offrep_date_fin_aff .classeLim {
+margin-right: 10px;
+}
+
+#offrep_date_debut_val_date, #offrep_date_debut_val_time, #offrep_date_fin_val_date, #offrep_date_fin_val_time,
+#offrep_date_debut_aff_date, #offrep_date_debut_aff_time, #offrep_date_fin_aff_date, #offrep_date_fin_aff_time  {
+display: flex;
+align-items: center;
+}
+
+
+
+#offrep_date_debut_val_date select, #offrep_date_debut_val_time select, #offrep_date_fin_val_date select, #offrep_date_fin_val_time select,
+#offrep_date_debut_aff_date select, #offrep_date_debut_aff_time select, #offrep_date_fin_aff_date select, #offrep_date_fin_aff_time select {
+padding: 5px;
+border: 1px solid #ccc;
+border-radius: 3px;
+font-size: 16px;
+margin-left: 10px;
+}
+
+/* Style pour le bouton de soumission du formulaire */
+#btnSendOffer {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+/* affichage liste offres */
+.offer_list{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 40px;
+}
+
+.offer_select{
+    display: flex;
+    justify-content: center;
+    border: 1px solid black;    
+    width:550px;
+    margin-bottom: 40px;
+}
+
+.offer_link{
+width: 470px;
+    margin-top: 10px;
+    margin-left: 28px;
+}
+
+.offer_del{
+    margin-top: 15px;
+    width: 50px;
+}
+
+.o_del_link{
+    margin-right: -28px;
+    border-left:1px solid black;   
+    text-decoration: none;
+}
+
+.o_upd_link{
+    margin-left: -28px;
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.o_upd_link:hover{
+    text-decoration: underline;
+    background-color: #191970;
+    color: goldenrod;
+}
+
+.o_del_link:hover{
+    background-color: red;
+    color: white;
+}   
+
+.offer_del svg{
+    margin-left: 18px;
+    color:#191970
+}
+
+.title_bo{
+    text-align: center;
+    margin: 50px;
+    color: #191970;
+    font-weight: lighter;
+}
+
+/* PAGE ERREUR 404 */
+
+.error404 svg{
+    width: 200px;
+}
+
+.error404{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 8%;
+}
+
+/* PAGE D'ACCUEIL BACKOFF */ 
+
+/* Formulaire d'ajout de message */
+.home_form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+    max-width: 30rem;
+}
+
+/* Champ de saisie */
+#home_ajouter,
+.home_form textarea {
+    padding: 0.5rem;
+    font-size: 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid #191970;
+    margin-bottom: 1rem;
+    width: 100%;
+}
+
+/* Bouton de soumission */
+#home_ajouter {
+    background-color: #ffffff;
+    color: #000000;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+}
+
+#home_ajouter:hover{
+    text-decoration: underline;
+    background-color: #191970;
+    color: goldenrod;
+}
+
+/* Lien de retour */
+.back_path {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.back_path a {
+    text-decoration: none;
+    color: #007bff;
+    font-weight: bold;
+}
+
+/* PARTENAIRES BACKOFF */
+/* Style pour le formulaire */
+.part_form {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Style pour les champs de formulaire */
+.part_form input[type="text"], .part_form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Style pour le champ d'upload de fichier */
+#part_image, #part_modif_image {
+    margin-bottom: 20px;
+}
+
+/* Style pour le bouton de soumission du formulaire */
+#part_ajouter {
+    padding: 0.5rem;
+    font-size: 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid #191970;
+    margin-bottom: 1rem;
+    width: 100%;
+    background-color: #ffffff;
+    color: #000000;
+}
+
+#part_ajouter:hover, #part_modif_modifier:hover{
+    text-decoration: underline;
+    background-color: #191970;
+    color: goldenrod;
+}
+
+#part_modif_modifier{
+    padding: 0.5rem;
+    font-size: 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid #191970;
+    margin-bottom: 1rem;
+    width: 100%;
+    background-color: #ffffff;
+    color: #000000;
+}
+

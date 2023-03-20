@@ -5,8 +5,8 @@
         {% for partenaire in partenaire %}
             <div class="right-section part_right">
                 <div class="partenaire">
-                    <img src= {{ asset ( partenaire.fichier.chemin_fichier ) }}  alt="Mon image" class="img_part">
-                    <h2>{{ partenaire.nom_part }}</h2>
+                    <img src= {{ asset ( partenaire.fichier.cheminFichier ) }}  alt="Mon image" class="img_part">
+                    <h2>{{ partenaire.nomPart }}</h2>
                     <button type="button" class="btn btn-warning btn_part" data-bs-toggle="modal" data-bs-target="#modalPart-{{partenaire.id}}">En savoir plus</button>
 
                     <!-- Modal affichant la description des partenaires -->
@@ -14,12 +14,12 @@
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="modalPartLabel">{{partenaire.nom_part}}</h5>
+                                    <h5 class="modal-title" id="modalPartLabel">{{partenaire.nomPart}}</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    {{partenaire.desc_part}} </br>
-                                    <a href = "{{partenaire.lien_part}}" target="_blank"> {{partenaire.lien_part}}</a>
+                                    {{partenaire.descPart}} </br>
+                                    <a href = "{{partenaire.lienPart}}" target="_blank"> {{partenaire.lienPart}}</a>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>

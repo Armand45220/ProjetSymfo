@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Partenaire;
 use App\Repository\PartenaireRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;

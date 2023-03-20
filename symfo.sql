@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : jeu. 26 jan. 2023 à 09:40
+-- Généré le : mar. 31 jan. 2023 à 14:23
 -- Version du serveur : 10.4.22-MariaDB
 -- Version de PHP : 8.1.1
 
@@ -61,7 +61,7 @@ CREATE TABLE `doctrine_migration_versions` (
 --
 
 INSERT INTO `doctrine_migration_versions` (`version`, `executed_at`, `execution_time`) VALUES
-('DoctrineMigrations\\Version20230123143915', '2023-01-23 15:39:28', 97);
+('DoctrineMigrations\\Version20230131120414', '2023-01-31 13:04:29', 187);
 
 -- --------------------------------------------------------
 
@@ -74,17 +74,6 @@ CREATE TABLE `fichier` (
   `nom_fichier` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `chemin_fichier` varchar(255) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Déchargement des données de la table `fichier`
---
-
-INSERT INTO `fichier` (`id_fichier`, `nom_fichier`, `chemin_fichier`) VALUES
-(1, 'adidas.png', 'static/img/adidas.png'),
-(2, 'nike.png', 'static/img/nike.png'),
-(3, 'bootstrap.png', 'static/img/bootstrap-logo.png'),
-(4, 'css.png', 'static/img/csslogo.png'),
-(5, 'clogo.png', 'static/img/clogo.png');
 
 -- --------------------------------------------------------
 
@@ -99,17 +88,6 @@ CREATE TABLE `partenaire` (
   `desc_part` varchar(1500) COLLATE utf8_unicode_ci NOT NULL,
   `lien_part` varchar(255) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Déchargement des données de la table `partenaire`
---
-
-INSERT INTO `partenaire` (`id`, `fichier_id`, `nom_part`, `desc_part`, `lien_part`) VALUES
-(1, 1, 'Adidas', 'Adidas est une firme allemande fondée en 1949 par Adolf Dassler, spécialisée dans la fabrication d\'articles de sport, basée à Herzogenaurach en Allemagne. Elle est mondialement connue sous l\'appellation « la marque aux trois bandes », des trois bandes parallèles qui constituent son logo.', 'https://www.adidas.fr/'),
-(2, 2, 'Nike', 'Nike est une marque de chaussures de sport et d\'équipements sportifs (vêtements et matériels). Leader sur le marché de l\'équipement sportif, Nike concurrence Puma et Adidas.', 'https://www.nike.com/fr/'),
-(3, 3, 'Bootstrap', 'Bootstrap est une collection d\'outils utiles à la création du design de sites et d\'applications web. C\'est un ensemble qui contient des codes HTML et CSS, des formulaires, boutons, outils de navigation et autres éléments interactifs, ainsi que des extensions JavaScript en option.', 'https://getbootstrap.com/'),
-(4, 4, 'Css', 'Traduit de l\'anglais, les feuilles de style en cascade sont un langage de feuille de style utilisé pour décrire la présentation d\'un document écrit dans un langage de balisage tel que HTML ou XML. CSS est une technologie fondamentale du World Wide Web, aux côtés de HTML et JavaScript', 'https://developer.mozilla.org/fr/docs/Web/CSS'),
-(5, 5, 'C#', 'C# est un langage de programmation orientée objet, commercialisé par Microsoft depuis 2002 et destiné à développer sur la plateforme Microsoft .NET.', 'https://learn.microsoft.com/fr-fr/dotnet/csharp/');
 
 --
 -- Index pour les tables déchargées
@@ -166,13 +144,13 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT pour la table `fichier`
 --
 ALTER TABLE `fichier`
-  MODIFY `id_fichier` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_fichier` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT pour la table `partenaire`
 --
 ALTER TABLE `partenaire`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Contraintes pour les tables déchargées

@@ -1,0 +1,54 @@
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1." />
+    <title>Ajoutez une offre</title>
+    <link href="{{ asset('static/css/app.css') }}" rel="stylesheet"/>
+</head>
+<body>
+    <h1 class="o_title">Nouvelle offre</h1>
+    <div class="add-offer-form">
+        {{ form_start(form) }}
+            <div class="add-offer-form">
+                {{ form_widget(form) }}
+            </div>
+                <button id="btnSendOffer" class="btn">Enregistrer</button>
+        {{ form_end(form) }}
+    </div>
+    <div class="back_path">
+        <a href= {{ path('admin_perm') }}>retour</a>
+    </div>
+</body>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const oPerma = document.querySelector('#offrep_type_offre_0');
+        const oLimite = document.querySelector('#offrep_type_offre_1');
+        const classeLim = document.getElementsByClassName("classeLim");
+        const classePerm = document.getElementsByClassName("classePerm");
+    
+        oPerma.addEventListener('click', function() {
+            for (let i = 0; i < classePerm.length; i++ ){
+                classePerm[i].style.display = 'block';
+            }       
+            for (let i = 0; i < classeLim.length; i++){
+                if (classeLim[i].style.display = 'block'){
+                    classeLim[i].style.display = 'none';
+                }
+            }
+        });
+        oLimite.addEventListener('click', function() {
+            for (let i = 0; i < classeLim.length; i++ ){
+                classeLim[i].style.display = 'block';
+            }
+            for (let i = 0; i < classePerm.length; i++){
+                if (classePerm[i].style.display = 'block'){
+                    classePerm[i].style.display = 'none';
+                }
+            }
+        }); 
+    });
+</script>
+
+</html>

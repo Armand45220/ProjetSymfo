@@ -1,43 +1,14 @@
 <section class="left-section">
     <!-- Sondage -->
-    <div class="survey">
-        <div id="survey-head" class="survey-general">
-            <h2> Votre avis compte </h2>
-        </div>
-        <!-- champ de sélection -->
-        <div id="selection">
-            <fieldsetid  class="survey-general">
-                <p id="font-center"> Pour quel parc d'attraction souhaiteriez-vous obtenir des prix ?</p>
-                <div class="center">
-                    <input type="radio" id="option1" name="opt" value="option1">
-                    <label for="option1">Réponse A</label>
-                </div>
-                <div class="center">
-                    <input type="radio" id="option2" name="opt" value="option2">
-                    <label for="option2">Réponse B</label>
-                </div>
-                <div class="center">
-                    <input type="radio" id="option3" name="opt" value="option3">
-                    <label for="option3">Réponse C</label>
-                </div>
-            </fieldsetid>
-        </div>
-        <!-- bouton validation sondage -->
-        <div id="survey-validation" class="main-flex survey-general">
-            <div class="view-answer">
-                <button name="view">Voir les réponses</button>
-            </div>
-            <div class="validate-answer">
-                <button id="heightValidate" name="validate">Valider</button>
-            </div>
-        </div>
-    </div>
+    {{ render(controller(
+                'App\\Controller\\QuestionController::showQuestionAction', {id:1}
+    )) }}
 
     <!-- Accès rapide -->
     <div id="quick-access" class="padding survey-general">
         <h2 class="colorAccess">Accès rapide</h2>
         <div>
-            <p> > Offres permanentes / Billetterie</p>
+            <a href={{ path('offre')}}> > Billetterie </a>
             <p> > Nous contacter
         </div>
     </div>
@@ -70,14 +41,14 @@
                 </div>
             </div>
         </div>
-            <button class="carouselPosition carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+            <!-- <button class="carouselPosition carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Previous</span>
             </button>
             <button id="carouselResponsive" class="carouselPosition carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Next</span>
-            </button>
+            </button> -->
             <a href={{ path('app_partenaire')}}>Découvrir tous nos partenaires</a>
         </div>
     </div>

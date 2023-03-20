@@ -18,67 +18,67 @@ class Partenaire
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $nom_part = null;
+    private ?string $nomPart = null;
 
     #[ORM\Column(length: 1500)]
-    private ?string $desc_part = null;
+    private ?string $descPart = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $lien_part = null;
+    private ?string $lienPart = null;
 
     #[ORM\ManyToOne(targetEntity:"App\Entity\Fichier", inversedBy:"Partenaire")]
     #[ORM\JoinColumn(name:"fichier_id", referencedColumnName:"id_fichier")]
-    private $fichier;
+    private $fichierPart;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getNom_part(): ?string
+    public function getNomPart(): ?string
     {
-        return $this-> nom_part;
+        return $this-> nomPart;
     }
 
-    public function setNomPart(string $nom_part): self
+    public function setNomPart(string $nomPart): self
     {
-        $this->nom_part = $nom_part;
+        $this->nomPart = $nomPart;
 
         return $this;
     }
 
-    public function getDesc_part(): ?string
+    public function getDescPart(): ?string
     {
-        return $this->desc_part;
+        return $this->descPart;
     }
 
-    public function setDesc_part(string $desc_part): self
+    public function setDescPart(string $descPart): self
     {
-        $this->desc_part = $desc_part;
+        $this->descPart = $descPart;
 
         return $this;
     }
 
-    public function getLien_part(): ?string
+    public function getLienPart(): ?string
     {
-        return $this->lien_part;
+        return $this->lienPart;
     }
 
-    public function setLienPart(string $lien_part): self
+    public function setLienPart(string $lienPart): self
     {
-        $this->lien_part = $lien_part;
+        $this->lienPart = $lienPart;
 
         return $this;
     }
     
     public function getFichier(): ?Fichier
     {
-        return $this->fichier;
+        return $this->fichierPart;
     }
 
-    public function setFichier(?Fichier $fichier): self
+    public function setFichier(?Fichier $fichierPart): self
     {
-        $this->fichier = $fichier;
+        $this->fichierPart = $fichierPart;
 
         return $this;
     }

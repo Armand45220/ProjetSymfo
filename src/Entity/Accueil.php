@@ -14,7 +14,7 @@ class Accueil
     private ?int $id_acc = null;
 
     #[ORM\Column(length: 3000, nullable: true)]
-    private ?string $mess_pres_acc = null;
+    private ?string $messPresAcc = null;
 
     public function getId(): ?int
     {
@@ -23,12 +23,12 @@ class Accueil
 
     public function getMessPresAcc(): ?string
     {
-        return $this->mess_pres_acc;
+        return $this->messPresAcc;
     }
 
     public function setMessPresAcc(?string $mess_pres_acc): self
     {
-        $this->mess_pres_acc = $mess_pres_acc;
+        $this->messPresAcc = $mess_pres_acc;
 
         return $this;
     }
