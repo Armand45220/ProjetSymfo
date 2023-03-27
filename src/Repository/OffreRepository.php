@@ -39,6 +39,22 @@ class OffreRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+     * Récupère les offres les plus récents
+     * @return Offre[] Returns an array of Eleve objects
+     */
+    public function recentOffer(int $typeOffre, ?int $numAff): array
+    {
+        $query = $this->createQueryBuilder('of');
+        $query
+                ->andWhere('of.type_offre = :type')
+                ->setParameter('type', $typeOffre)
+                ->orderBy('of.id','ASC')
+        ;
+
+        return $query->getQuery()->getResult();
+    }
+
 //    /**
 //     * @return Offre[] Returns an array of Offre objects
 //     */
