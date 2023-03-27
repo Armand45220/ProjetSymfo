@@ -25,12 +25,7 @@
         <p>Recevez un email à chaque nouvelle offre sur le site internet </p>
         <div class="main-flex footer-element-flex">
             <div class="input-footer">
-                <form action="" method="POST">
-                    <input type="text"  class="form-control form-control-lg" placeholder="E-mail" name="email" required>
-                </form>
-            </div>
-            <div class="button-footer">
-                <button name="sendmailfooter">S'inscrire</button>
+                {{ render(controller('App\\Controller\\NotificationController::newsletterForm')) }}
             </div>
         </div>
     </div>
