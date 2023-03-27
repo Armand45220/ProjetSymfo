@@ -20,5 +20,3 @@ class PartenaireController extends AbstractController
         
     }
 }
-
-?>
