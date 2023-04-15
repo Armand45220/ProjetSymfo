@@ -36,7 +36,7 @@ class Membre
 
     public function getNomMembre(): ?string
     {
-        return $this->nom_membre;
+        return $this-> nom_membre;
     }
 
     public function setNomMembre(string $nom_membre): self
