@@ -1,0 +1,26 @@
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1." />
+    <title>Ajout partenaire</title>
+    <link href="{{ asset('static/css/app.css') }}" rel="stylesheet"/>
+</head>
+<body>
+<h1 class="title_bo">Ajouter un membre</h1>
+<div class="part_form">
+    {{ form_start(form) }}
+
+    {{ form_row(form.nom_membre) }}
+    {{ form_row(form.desc_membre) }}
+    {{ form_row(form.image) }}
+
+    <input type="hidden" name="{{ form.fichier_id.vars.full_name }}" id="{{ form.fichier_id.vars.id }}" value="{{ form.fichier_id.vars.value }}" />
+
+    {{ form_end(form) }}
+</div>
+<div class="back_path">
+    <a href= {{ path('membreAffiche') }}>retour</a>
+</div>
+</body>
+</html>
