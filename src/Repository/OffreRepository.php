@@ -37,46 +37,29 @@ class OffreRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
-    }
+    }   
 
-    /**
-     * Récupère les offres les plus récents
-     * @return Offre[] Returns an array of Eleve objects
-     */
-    public function recentOffer(int $typeOffre, ?int $numAff): array
+    //affichage offres permanentes
+
+    public function affOffresPerm()
     {
-        $query = $this->createQueryBuilder('of');
-        $query
-                ->andWhere('of.type_offre = :type')
-                ->setParameter('type', $typeOffre)
-                ->orderBy('of.id','ASC')
-        ;
-
-        return $query->getQuery()->getResult();
+        return $this->createQueryBuilder('o')
+            ->select('o.date_insert_offre, o.nom_offre, o.desc_offre, o.date_debut_val, o.date_fin_val, o.nb_places_min, o.lien_offre')
+            ->where('o.type_offre = 1')
+            ->getQuery()
+            ->getResult();
     }
 
-//    /**
-//     * @return Offre[] Returns an array of Offre objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('o')
-//            ->andWhere('o.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('o.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    // affichage offres limitées
 
-//    public function findOneBySomeField($value): ?Offre
-//    {
-//        return $this->createQueryBuilder('o')
-//            ->andWhere('o.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    public function affOffresLim(){
+        return $this->createQueryBuilder('o')
+        ->select('o.date_insert_offre, o.nom_offre, o.desc_offre, o.date_debut_aff, o.date_fin_aff, o.lien_offre')
+        ->where('o.type_offre = 2')
+        ->andWhere('o.num_aff != 0')
+        ->orderBy('o.num_aff', 'ASC')
+        ->addOrderBy('o.id_offre', 'ASC')
+        ->getQuery()
+        ->getResult();
+    }
 }
