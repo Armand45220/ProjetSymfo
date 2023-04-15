@@ -24,7 +24,7 @@ class OffreController extends AbstractController
     public function offrePerm( PaginatorInterface $paginator, Request $request)
     {
         $query = $this->entityManager->createQuery(
-            'SELECT o.nom_offre, o.desc_offre, o.date_debut_val, o.date_fin_val, o.nb_places_min, o.lien_offre
+            'SELECT o.date_insert_offre, o.nom_offre, o.desc_offre, o.date_debut_val, o.date_fin_val, o.nb_places_min, o.lien_offre
             FROM App\Entity\Offre o
             WHERE o.type_offre = 1'
         );
@@ -45,9 +45,9 @@ class OffreController extends AbstractController
     public function offreLim(PaginatorInterface $paginator, Request $request)
     {
         $query = $this->entityManager->createQuery(
-            'SELECT o.nom_offre, o.desc_offre, o.date_debut_aff, o.date_fin_aff, o.lien_offre
+            'SELECT o.date_insert_offre, o.nom_offre, o.desc_offre, o.date_debut_aff, o.date_fin_aff, o.lien_offre
             FROM App\Entity\Offre o
-            WHERE o.type_offre = 2
+            WHERE o.type_offre = 2 AND o.num_aff != 0
             ORDER BY 
             CASE 
             WHEN o.num_aff IS NOT NULL THEN o.num_aff

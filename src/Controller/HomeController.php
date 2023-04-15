@@ -25,9 +25,9 @@ class HomeController extends AbstractController
     public function HomeOffer(PaginatorInterface $paginator, AccueilRepository $accueilRepository, Request $request)
     {
         $query = $this->entityManager->createQuery(
-            'SELECT o.nom_offre, o.desc_offre, o.date_debut_aff, o.date_fin_aff, o.lien_offre
+            'SELECT o.date_insert_offre, o.nom_offre, o.desc_offre, o.date_debut_aff, o.date_fin_aff, o.lien_offre
             FROM App\Entity\Offre o
-            WHERE o.type_offre = 2
+            WHERE o.type_offre = 2 AND o.num_aff != 0
             ORDER BY 
             CASE 
             WHEN o.num_aff IS NOT NULL THEN o.num_aff
@@ -49,3 +49,6 @@ class HomeController extends AbstractController
     }
 
 }
+
+
+?>
