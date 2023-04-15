@@ -37,6 +37,9 @@ class Offre
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $date_fin_aff = null;
 
+    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    private ?\DateTimeInterface $date_insert_offre = null;
+
     #[ORM\Column(nullable: true)]
     private ?int $num_aff = null;
 
@@ -175,6 +178,18 @@ class Offre
     public function setTypeOffre(int $type_offre): self
     {
         $this->type_offre = $type_offre;
+
+        return $this;
+    }
+
+    public function getDateInsertOffre(): ?\DateTimeInterface
+    {
+        return $this->date_insert_offre;
+    }
+
+    public function setDateInsertOffre(\DateTimeInterface $date_insert_offre): self
+    {
+        $this->date_insert_offre = $date_insert_offre;
 
         return $this;
     }
