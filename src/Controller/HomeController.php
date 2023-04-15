@@ -21,10 +21,20 @@ class HomeController extends AbstractController
         $this->entityManager = $entityManager;
     }
 
-    #[Route(path: "/accueil", name: "home")]
-    public function HomeOffer(PaginatorInterface $paginator, OffreRepository $offreRepository, AccueilRepository $accueilRepository, Request $request)
+    #[Route(path: "/", name: "home")]
+    public function HomeOffer(PaginatorInterface $paginator, AccueilRepository $accueilRepository, Request $request)
     {
-        $query = $offreRepository->affOffresLim();
+        $query = $this->entityManager->createQuery(
+            'SELECT o.nom_offre, o.desc_offre, o.date_debut_aff, o.date_fin_aff, o.lien_offre
+            FROM App\Entity\Offre o
+            WHERE o.type_offre = 2
+            ORDER BY 
+            CASE 
+            WHEN o.num_aff IS NOT NULL THEN o.num_aff
+            ELSE 99999999 
+            END'
+            
+        );
         
         $pagination = $paginator->paginate(
             $query,
@@ -39,6 +49,3 @@ class HomeController extends AbstractController
     }
 
 }
-
-
-?>
