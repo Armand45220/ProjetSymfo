@@ -1,0 +1,14 @@
+{% extends 'basebo.html.twig' %}
+{% block body %}
+    <h1 class="title_bo">Ajouter un message</h1>
+    <div class="home_form"> 
+        {{ form_start(form) }}
+
+        {{ form_row(form.mess_pres_acc) }}
+
+        {{ form_end(form) }}
+    </div>
+    <div class="back_path">
+        <a href= {{ path('app_admin') }}>retour</a>
+    </div>
+{% endblock %}

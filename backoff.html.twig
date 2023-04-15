@@ -1,0 +1,17 @@
+{% extends 'basebo.html.twig' %}
+{% block body %}
+    <div class="botitle">
+        <h1>ESPACE ADMINISTRATEUR</h1>
+    </div>
+    <div class="admin-menu">
+        <a href= {{ path('admin_lim') }}><div class="AdmPath">ACCEDER AUX OFFRES</div></a>
+        <a href= {{ path('partList') }}><div class="AdmPath">ACCEDER AUX PARTENAIRES</div></a>
+        <a href= {{ path('home_adm') }}><div class="AdmPath">ACCEDER A LA PAGE D'ACCUEIL</div></a>
+    </div>
+    </br>
+    </br>
+    </br>
+    </br>
+    </br>
+    <a href= {{ path('app_logout') }}><button class="logoutbutton"> DECONNEXION </button></a>
+{% endblock %}
