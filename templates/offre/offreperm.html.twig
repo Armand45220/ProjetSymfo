@@ -1,9 +1,12 @@
 {% extends 'base.html.twig' %}
 
 {% block content_right %}
-    <section class="right-section">
-        <h1 class="offerTitle">BILLETTERIE</h1>
-        <h2 class="offer_menu"> <span class="o_aff">Offres permanentes</span> / <a href={{ path('offresLim')}} class="o_sel">Offres limitées</a> </h2>
+<section class="right-section">
+    <h1 class="offerTitle">BILLETTERIE</h1>
+    <h2 class="offer_menu"> <span class="o_aff">Offres permanentes</span> / <a href={{ path('offresLim')}} class="o_sel">Offres limitées</a> </h2>
+    <div class="actualiser">
+        <a href= {{ path('actualiser_perm') }}  class="btn btn-primary btnAct">Actualiser les offres</a>
+    </div>
     {% for offre in pagination %}
         <div class="offer_content">
             <!-- Partie haute de la div -->
@@ -39,6 +42,6 @@
     <div class="pagination">
         {{ knp_pagination_render(pagination) }}
     </div>
-        </section>
+</section>
 
 {% endblock %}
