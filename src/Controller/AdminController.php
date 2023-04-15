@@ -2,23 +2,34 @@
 
 namespace App\Controller;
 
+use App\Entity\Action;
+use App\Entity\APropos;
+use App\Entity\Membre;
+use App\Form\ActionType;
+use App\Form\MembreType;
+use App\Form\AProposType;
+use App\Form\ActionModifType;
+use App\Form\MembreModifType;
+use App\Form\AProposModifType;
+use App\Repository\ActionRepository;
+use App\Repository\AProposRepository;
+use App\Repository\FichierRepository;
+use App\Repository\MembreRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\AdminRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use App\Entity\Offre;
 use App\Entity\Fichier;
 use App\Entity\Partenaire;
 use App\Entity\Accueil;
 use App\Form\OffrepType;
-use App\Form\OffrelType;
-use App\Form\ModifLimType;
-use App\Form\ModifPermType;
+use App\Form\OffreModifType;
 use App\Form\PartModifType;
 use App\Form\HomeType;
 use App\Form\PartType;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use App\Repository\PartenaireRepository;
 
@@ -37,154 +48,46 @@ class AdminController extends AbstractController
     {
         return $this->render('admin/backoff.html.twig');
     }
-
     //CONTROLLERS BACKOFFICE OFFRE
-
-    #[Route("/admin/offre_menu", name:"offre_menu")]
-
-    public function offerMenu() : Response{
-        return $this->render('admin/offre_menu.html.twig');
-    }
-
-    //Ajout d'offres permanentes
-
-    #[Route("/admin/offre_perm", name:"offre_adm_p")]
+    #[Route("/admin/offre", name:"offre_adm")]
     
-    public function createOffrep(Request $request) : Response
+    public function createOffre(Request $request) : Response
     {
         $offre = new Offre();
         $form = $this->createForm(OffrepType::class, $offre);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            // Vérifie que la date de fin des offres permanentes soit toujours supérieure à la date de début
-            $dateDebutValidite = $offre->getDateDebutVal();
-            $dateFinValidite = $offre->getDateFinVal();
-    
-            if ($dateFinValidite <= $dateDebutValidite) {
-                $this->addFlash('error', 'La date de fin doit être supérieure à la date de début.');
-                return $this->redirectToRoute('offre_adm_p');
-            }
 
-            // Remplir automatiquement la date d'insertion
-            $offre->setDateInsertOffre(new \DateTime('now'));
-
+            // Si le 'num_aff' n'existe pas déjà, enregistrer la nouvelle offre
             $this->entityManager->persist($offre);
             $this->entityManager->flush();  
 
-            $this->addFlash('success', 'Offre ajoutée !');  
-            return $this->redirectToRoute('admin_perm');
-        }
-
-        return $this->render('admin\offre_form_p.html.twig', [
-            'offre' => $offre,
-            'form' => $form->createView(),
-        ]);
-    }
-
-    //Controller pour l'ajout des offres limitées
-
-    #[Route("/admin/offre_lim", name:"offre_adm_l")]
-    
-    public function createOffrel(Request $request) : Response
-    {
-        $offre = new Offre();
-        $form = $this->createForm(OffrelType::class, $offre);
-
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-
-            // Vérifie que la date de fin des offres permanentes soit toujours supérieure à la date de début
-
-            $dateDebutAffichage = $offre->getDateDebutAff();
-            $dateFinAffichage = $offre->getDateFinAff();
-    
-            if ($dateFinAffichage <= $dateDebutAffichage) {
-                $this->addFlash('error', 'La date de fin doit être supérieure à la date de début.');
-                return $this->redirectToRoute('offre_adm_l');
-            }
-            
-            // Remplir automatiquement la date d'insertion
-            $offre->setDateInsertOffre(new \DateTime('now'));
-
-            $this->entityManager->persist($offre);
-            $this->entityManager->flush();  
-
-            $this->addFlash('success', 'Offre ajoutée !');  
             return $this->redirectToRoute('admin_lim');
         }
 
-        return $this->render('admin\offre_form_l.html.twig', [
+        return $this->render('admin\offre_form.html.twig', [
             'offre' => $offre,
             'form' => $form->createView()
         ]);
     }
-
-    // Page admin pour la modif des offres limitées
-    #[Route("/admin/{id}/offre_modif/lim", name:"modif_offre_lim")]
-    public function editOfferLim(Request $request, EntityManagerInterface $em, int $id)
+    // Page admin pour la modif des offres
+    #[Route("/admin/{id}/offre_modif", name:"modif_offre")]
+    public function editOffer(Request $request, EntityManagerInterface $em, int $id)
     {
         $offer = $em->getRepository(Offre::class)->find($id);
 
-        $form = $this->createForm(ModifLimType::class, $offer);
+        $form = $this->createForm(OffreModifType::class, $offer);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-
-            $dateDebutAffichage = $offer->getDateDebutAff();
-            $dateFinAffichage = $offer->getDateFinAff();
-
-            if ($dateFinAffichage <= $dateDebutAffichage) {
-                $this->addFlash('error', 'La date de fin doit être supérieure à la date de début.');
-                return $this->render('admin/offremodiflim.html.twig', [
-                    'form' => $form->createView(),
-                    'offer' => $offer,
-                ]);
-            }
-            
             $em->persist($offer);
             $em->flush();
-            
-            $this->addFlash('success', 'Offre modifiée !');
+
             return $this->redirectToRoute('admin_lim');
         }
 
-        return $this->render('admin/offremodiflim.html.twig', [
-            'form' => $form->createView(),
-            'offer' => $offer,
-        ]);
-    }
-
-    // Page admin pour la modif des offres permanentes
-    #[Route("/admin/{id}/offre_modif/perm", name:"modif_offre_perm")]
-    public function editOfferPerm(Request $request, EntityManagerInterface $em, int $id)
-    {
-        $offer = $em->getRepository(Offre::class)->find($id);
-
-        $form = $this->createForm(ModifPermType::class, $offer);
-
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-
-            $dateDebutValidite = $offer->getDateDebutVal();
-            $dateFinValidite = $offer->getDateFinVal();
-
-            if ($dateFinValidite <= $dateDebutValidite) {
-                $this->addFlash('error', 'La date de fin doit être supérieure à la date de début.');
-                return $this->render('admin/offremodifperm.html.twig', [
-                    'form' => $form->createView(),
-                    'offer' => $offer,
-                ]);
-            }
-            
-            $em->persist($offer);
-            $em->flush();
-            
-            $this->addFlash('success', 'Offre modifiée !');
-            return $this->redirectToRoute('admin_perm');
-        }
-
-        return $this->render('admin/offremodifperm.html.twig', [
+        return $this->render('admin/offremodif.html.twig', [
             'form' => $form->createView(),
             'offer' => $offer,
         ]);
@@ -202,15 +105,12 @@ class AdminController extends AbstractController
         $em->remove($offer);
         $em->flush();
 
-
-        $this->addFlash('success', 'Offre supprimée !');
         return $this->redirectToRoute('admin_lim');
     }
 
     
     // Page admin pour l'affichage des offres limitées dans le backoffice
     #[Route("/admin/offre_aff", name:"admin_lim")]
-    
     public function affOffreL(AdminRepository $adminRepository)
     {
         $offersl = $adminRepository->getOfferslAdmin();
@@ -223,7 +123,6 @@ class AdminController extends AbstractController
 
     // Page admin pour l'affichage des offres permanentes dans le backoffice
     #[Route("/admin/offre_affp", name:"admin_perm")]
-    
     public function affOffreP(AdminRepository $adminRepository)
     {
         $offersp = $adminRepository->getOfferspAdmin();
@@ -233,44 +132,41 @@ class AdminController extends AbstractController
         ]);
     }
 
-
-
-//partenaires 
+    //partenaires
     //ajout partenaires
-    #[Route("/admin/partenaire", name:"part_adm")]
-
+    #[Route("/admin/partenaire/add", name:"part_adm")]
     public function addPartenaire(Request $request)
     {
         $partenaire = new Partenaire();
         $fichier = new Fichier();
-    
+
         $form = $this->createForm(PartType::class, $partenaire);
-    
+
         $form->handleRequest($request);
-    
+
         if ($form->isSubmitted() && $form->isValid()) {
             $partenaire = $form->getData();
-    
+
             $imageFile = $form->get('image')->getData();
             if ($imageFile) {
                 $newFilename = uniqid().'.'.$imageFile->getClientOriginalExtension();
                 $imageFile->move($this->getParameter('upload_directory'), $newFilename);
-    
+
                 $fichier->setNomFichier($imageFile->getClientOriginalName());
                 $fichier->setCheminFichier('C:\Users\decor\OneDrive\Bureau\ProjetSymfo\public\static\img'.$newFilename);
-    
+
                 $this->entityManager->persist($fichier);
                 $this->entityManager->flush();
-    
+
                 $partenaire->setFichier($fichier);
             }
-    
+
             $this->entityManager->persist($partenaire);
             $this->entityManager->flush();
-    
+
             return $this->redirectToRoute('app_admin');
         }
-    
+
         return $this->render('admin/part_form.html.twig', [
             'form' => $form->createView(),
         ]);
@@ -282,25 +178,24 @@ class AdminController extends AbstractController
         $partenaire = $partenaireRepository->findAll();
         return $this->render('admin/part_liste.html.twig', [
             'partenaire' => $partenaire ]);
-        
+
     }
     //Modification des partenaires
     #[Route("/admin/{id}/part_modif", name:"modif_part")]
     public function editPart(Request $request, EntityManagerInterface $em, int $id)
     {
         $part = $em->getRepository(Partenaire::class)->find($id);
-    
+
         $form = $this->createForm(PartModifType::class, $part);
-    
+
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-    
             $em->persist($part);
             $em->flush();
-    
-            return $this->redirectToRoute('app_admin');
+
+            return $this->redirectToRoute('partList');
         }
-    
+
         return $this->render('admin/partmodif.html.twig', [
             'form' => $form->createView(),
             'part' => $part,
@@ -315,42 +210,264 @@ class AdminController extends AbstractController
         $entityManager->flush();
 
         // Supprime le fichier associé
-        $fichier = $partenaire->getFichierPart();
+        $fichier = $partenaire->getFichier();
         $entityManager->remove($fichier);
         $entityManager->flush();
         return $this->redirectToRoute('partList');
     }
 
-    //Page d'accueil
-    #[Route("/admin/accueil", name:"home_adm")]
-
-    public function createMess(Request $request) : Response
+    //a Propos de nous
+    //ajout a propos de nous
+    #[Route("/admin/aPropos/add", name:"APropos_admin")]
+    public function addAPropos(Request $request)
     {
-        $existingMess = $this->entityManager->getRepository(Accueil::class)->findOneBy([]);
-    
-        if ($existingMess === null) {
-            $mess = new Accueil();
-        } else {
-            $mess = $existingMess;
-        }
-    
-        $form = $this->createForm(HomeType::class, $mess);
-    
+        $propos = new APropos();
+        $form = $this->createForm(AProposType::class, $propos);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $propos
+               ->setDescReglements($form->get('descReglements')->getData())
+               ->setEmail($form->get('email')->getData())
+               ;
+                $this->entityManager->persist($propos);
+                $this->entityManager->flush();
+
+                return $this->redirectToRoute('aProposAffiche');
+            }
+
+            return $this->render('admin/aProposAjouter.html.twig', [
+                'form' => $form->createView(),
+            ]);
+    }
+    // Affichage de A propos de nous
+    #[Route("/admin/afficheAPropos", name:"aProposAffiche")]
+    public function aProposAffiche(AProposRepository $AProposRepository): Response
+    {
+        return $this->render('admin/aPropos.html.twig', [
+                'infos_aPropos' => $AProposRepository->findAll()]
+        );
+    }
+
+    //Modification de a propos de nous
+    #[Route("/admin/{id}/aPropos_modif", name:"modif_aPropos")]
+    public function editAPropos(Request $request, EntityManagerInterface $em, int $id)
+    {
+        $propos = $em->getRepository(APropos::class)->find($id);
+        $form = $this->createForm(AProposModifType::class, $propos);
+
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-    
+            $em->persist($propos);
+            $em->flush();
 
-            $this->entityManager->persist($mess);
-            $this->entityManager->flush();  
-    
-            return $this->redirectToRoute('app_admin');
+            return $this->redirectToRoute('aProposAffiche');
         }
-    
-        return $this->render('admin\home_form.html.twig', [
-            'mess' => $mess,
-            'form' => $form->createView()
+
+        return $this->render('admin/proposModif.html.twig', [
+            'form' => $form->createView(),
+            'propos' => $propos,
         ]);
     }
+
+    //suppression de a propos de nous
+    #[Route("/admin/{id}/aPropos_supp", name:"supp_aPropos")]
+    public function deleteAPropos(APropos $propos, EntityManagerInterface $entityManager)
+    {
+        $entityManager->remove($propos);
+        $entityManager->flush();
+        return $this->redirectToRoute('aProposAffiche');
+    }
+
+    //Membre
+    //ajout Membre
+    #[Route("/admin/membre/add", name:"membre_admin")]
+    public function addMembre(Request $request)
+    {
+        $membre = new Membre();
+        $fichier = new Fichier();
+
+        $form = $this->createForm(MembreType::class, $membre);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $propos = $form->getData();
+
+            $imageFile = $form->get('image')->getData();
+            if ($imageFile) {
+                $newFilename = uniqid().'.'.$imageFile->getClientOriginalExtension();
+                $imageFile->move($this->getParameter('upload_directory'), $newFilename);
+
+                $fichier->setNomFichier($imageFile->getClientOriginalName());
+                $fichier->setCheminFichier('..\..\static\img'.$newFilename);
+
+                $this->entityManager->persist($fichier);
+                $this->entityManager->flush();
+
+                $propos->setFichier($fichier);
+            }
+
+            $this->entityManager->persist($membre);
+            $this->entityManager->flush();
+
+            return $this->redirectToRoute('membreAffiche');
+        }
+
+        return $this->render('admin/membreAjouter.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+    // Affichage de membre
+    #[Route("/admin/afficheMembre", name:"membreAffiche")]
+    public function membreAffiche(MembreRepository $membreRepository): Response
+    {
+        $membre = $membreRepository->findAll();
+        return $this->render('admin/membres-liste.html.twig', [
+            'membres' => $membre ]);
+
+    }
+    //Modification de membre
+    #[Route("/admin/{id}/membre_modif", name:"modif_membre")]
+    public function editMembre(Request $request, EntityManagerInterface $em, int $id)
+    {
+        $membre = $em->getRepository(Membre::class)->find($id);
+
+        $form = $this->createForm(MembreModifType::class, $membre);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em->persist($membre);
+            $em->flush();
+
+            return $this->redirectToRoute('membreAffiche');
+        }
+
+        return $this->render('admin/membreModifier.html.twig', [
+            'form' => $form->createView(),
+            'membre' => $membre,
+        ]);
+    }
+
+    //suppression de membre
+    #[Route("/admin/{id}/membre_supp", name:"supp_membre")]
+    public function deleteMembre(Membre $membre, EntityManagerInterface $entityManager)
+    {
+        $entityManager->remove($membre);
+        $entityManager->flush();
+
+        // Supprime le fichier associé
+        $fichier = $membre->getFichier();
+        $entityManager->remove($fichier);
+        $entityManager->flush();
+        return $this->redirectToRoute('membreAffiche');
+    }
+
+
+    //Action
+    //ajout action
+    #[Route("/admin/action/add", name:"action_adm")]
+    public function addAction(Request $request)
+    {
+        $action = new Action();
+        $form = $this->createForm(ActionType::class, $action);
+
+        $form->handleRequest($request);
+
+       if ($form->isSubmitted() && $form->isValid()) {
+            $action
+
+               ->setDescAct($form->get('desc_act')->getData())
+               ;
+                $this->entityManager->persist($action);
+                $this->entityManager->flush();
+
+                return $this->redirectToRoute('actionAffiche');
+            }
+            return $this->render('admin/actionAjouter.html.twig', [
+                'form' => $form->createView(),
+            ]);
+    }
+
+    // Affichage de Action
+    #[Route("/admin/afficheAction", name:"actionAffiche")]
+    public function actionAffiche(ActionRepository $actionRepository): Response
+    {
+        $action = $actionRepository->findAll();
+        return $this->render('admin/actions_liste.html.twig', [
+            'infos_actions' => $action ]);
+
+    }
+    //Modification de l'action
+    #[Route("/admin/{id}/action_modif", name:"modif_action")]
+    public function editAction(Request $request, EntityManagerInterface $em, int $id)
+    {
+        $action = $em->getRepository(Action::class)->find($id);
+
+        $form = $this->createForm(ActionModifType::class, $action);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em->persist($action);
+            $em->flush();
+
+            return $this->redirectToRoute('actionAffiche');
+        }
+
+        return $this->render('admin/actionModifier.html.twig', [
+            'form' => $form->createView(),
+            'infos_action' => $action,
+        ]);
+    }
+
+    //suppression de l'action
+    #[Route("/admin/{id}/action_supp", name:"supp_action")]
+    public function deleteAction(Action $action, EntityManagerInterface $entityManager)
+    {
+        $entityManager->remove($action);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('actionAffiche');
+    }
+
+
+
+
+
+
+
+
+    //Page d'accueil
+        #[Route("/admin/accueil", name:"home_adm")]
+    
+        public function createMess(Request $request) : Response
+        {
+            $existingMess = $this->entityManager->getRepository(Accueil::class)->findOneBy([]);
+        
+            if ($existingMess === null) {
+                $mess = new Accueil();
+            } else {
+                $mess = $existingMess;
+            }
+        
+            $form = $this->createForm(HomeType::class, $mess);
+        
+            $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid()) {
+        
+
+                $this->entityManager->persist($mess);
+                $this->entityManager->flush();  
+        
+                return $this->redirectToRoute('app_admin');
+            }
+        
+            return $this->render('admin\home_form.html.twig', [
+                'mess' => $mess,
+                'form' => $form->createView()
+            ]);
+        }
 }
 
 ?>
