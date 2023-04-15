@@ -46,6 +46,7 @@ class OffreRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('o')
             ->select('o.date_insert_offre, o.nom_offre, o.desc_offre, o.date_debut_val, o.date_fin_val, o.nb_places_min, o.lien_offre')
             ->where('o.type_offre = 1')
+            ->andWhere('o.num_aff != 0')
             ->getQuery()
             ->getResult();
     }
@@ -62,4 +63,37 @@ class OffreRepository extends ServiceEntityRepository
         ->getQuery()
         ->getResult();
     }
+
+    //actualisation des offres limitées 
+    public function actualiserOffresLim()
+    {
+        $dateActuelle = new \DateTime();
+
+        $offres = $this->findBy(['type_offre' => 2]);
+
+        foreach ($offres as $offre) {
+            if ($offre->getDateFinAff() < $dateActuelle) {
+                $offre->setNumAff(0);
+            }
+        }
+
+        $this->_em->flush();
+    }
+
+    //actualisation des offres limitées 
+    public function actualiserOffresPerm()
+    {
+        $dateActuelle = new \DateTime();
+
+        $offres = $this->findBy(['type_offre' => 1]);
+
+        foreach ($offres as $offre) {
+            if ($offre->getDateFinVal() < $dateActuelle) {
+                $offre->setNumAff(0);
+            }
+        }
+
+        $this->_em->flush();
+    }
+
 }
