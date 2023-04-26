@@ -4,6 +4,16 @@
 
 {% block content_right %}
 <section id="formulate">
+    {% for message in app.flashes('succesContact') %}
+        <div class="flash-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+    {% for message in app.flashes('erreurContact') %}
+        <div class="flash-success">
+            {{ message }}
+        </div>
+    {% endfor %}
     <div class="container-fluid">
         {{ form_start(form)}}
         <div>
