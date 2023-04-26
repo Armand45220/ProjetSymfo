@@ -7,10 +7,13 @@ use App\Repository\AccueilRepository;
 use App\Repository\OffreRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Notification;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -22,9 +25,12 @@ class NotificationController extends AbstractController
     {
     }
 
+    /**
+     * @throws TransportExceptionInterface
+     */
     #[Route('/inscription-newsletter', name: 'app_newsletter_registration')]
-    public function subscribe(PaginatorInterface $paginator, AccueilRepository $accueilRepository,OffreRepository $offreRepository, Request $request):Response{
-        $this->newsletterForm();
+    public function subscribe(PaginatorInterface $paginator, AccueilRepository $accueilRepository,OffreRepository $offreRepository, Request $request, MailerInterface $mailer):Response{
+        $this->newsletterForm($mailer);
 
         $query = $this->entityManager->createQuery(
             'SELECT o.nom_offre, o.desc_offre, o.date_debut_aff, o.date_fin_aff, o.lien_offre
@@ -39,8 +45,6 @@ class NotificationController extends AbstractController
         );
 
 
-
-
         $pagination = $paginator->paginate(
             $query,
             $request->query->getInt('page', 1),
@@ -53,7 +57,10 @@ class NotificationController extends AbstractController
             'pagination' => $pagination, 'mess' => $mess]);
     }
 
-    public function newsletterForm():Response
+    /**
+     * @throws TransportExceptionInterface
+     */
+    public function newsletterForm(MailerInterface $mailer):Response
     {
         // Créer une instance du formulaire
         $newletter =  new Notification() ;
@@ -69,6 +76,17 @@ class NotificationController extends AbstractController
 
             $this->entityManager->persist($newletter);
             $this->entityManager->flush();
+
+            $email = (new TemplatedEmail())
+                ->from('cuisine.saintvincentsenlis@gmail.com')
+                ->to($newletter->getEmailNotif())
+                ->subject('Votre newsletter')
+                ->htmlTemplate('email/send_newsletter.html.twig')
+                ->context([
+                    'user' => $newletter->getEmailNotif()
+                ]);
+                /*Envoie d'un email*/
+                $mailer->send($email);
 
         }
 
