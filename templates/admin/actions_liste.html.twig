@@ -8,6 +8,7 @@
     <link href="{{ asset('static/css/app.css') }}" rel="stylesheet"/>
 </head>
 <body>
+<!-- lien pour aller vers l'ajout -->
 <h1 class="title_bo"> Liste des actions <a href= {{ path('action_adm') }}> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-square" viewBox="0 0 16 16">
             <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
             <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
@@ -15,21 +16,77 @@
 </h1>
 <div class="offer_list">
     {% for action in infos_actions %}
-        <div class="offer_select">
-            <a href="{{ path('modif_action', {'id': action.idAct})}}" class="o_upd_link">
-                <div class="offer_link">
-                    <p>{{ action.DescAct}}</p>
-                </div>
-            </a>
-            <a href="{{ path('supp_action', {'id': action.idAct}) }}" class="o_del_link">
-                <div class="offer_del">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-                        <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-                    </svg>
-                </div>
-            </a>
-        </div>
+        <!-- affichage de base de donné sous forme de liste des actions m'y en base de donné avec une condition pour supprimer le visuel de balise genere par l'hypertext et avoir le vrai visuel pour les italic gras et heading -->
+            <div class="offer_select">
+                <!-- avec un lien pour aller vers sa modification -->
+                <a href="{{ path('modif_action', {'id': action.IdAct})}}" class="o_upd_link">
+                    <div class="offer_link">
+                        {% if '<p>' in action.NomAct or '<i>' in action.NomAct or '<strong>' in action.NomAct  or '<h1>' in action.NomAct or '<h2>' in action.NomAct or '<h3>' in action.NomAct or '<h4>' in action.NomAct or '<h5>' in action.NomAct or '<h6>' in action.NomAct %}
+                            {% if '<p>' in action.NomAct and not ('<i>' in action.NomAct or '<strong>' in action.NomAct or '<h1>' in action.NomAct or '<h2>' in action.NomAct or '<h3>' in action.NomAct or '<h4>' in action.NomAct or '<h5>' in action.NomAct or '<h6>' in action.NomAct) %}
+                                <p>{{ action.NomAct|replace({'<p>':'','</p>':''})}}</p>
+                            {% elseif '<strong>' in action.NomAct and '<i>' in action.NomAct %}
+                                <p><i><strong>{{ action.NomAct|replace({'<i>':'','</i>':'','<strong>':'','</strong>':'','<p>':'','</p>':''})}}</strong></i></p>
+                            {% elseif '<i>' in action.NomAct %}
+                                <p><i>{{ action.NomAct|replace({'<i>':'','</i>':'','<p>':'','</p>':''})}}</i></p>
+                            {% elseif '<strong>' in action.NomAct %}
+                                <p><strong>{{ action.NomAct|replace({'<strong>':'','</strong>':'','<p>':'','</p>':''})}}</strong></p>
+                            {% elseif '<h1>' in action.NomAct %}
+                                <h1>{{ action.NomAct|replace({'<h1>':'','</h1>':''})}}</h1>
+                            {% elseif '<h2>' in action.NomAct %}
+                                <h2>{{ action.NomAct|replace({'<h2>':'','</h2>':''})}}</h2>
+                            {% elseif '<h3>' in action.NomAct %}
+                                <h3>{{ action.NomAct|replace({'<h3>':'','</h3>':''})}}</h3>
+                            {% elseif '<h4>' in action.NomAct %}
+                                <h4>{{ action.NomAct|replace({'<h4>':'','</h4>':''})}}</h4>
+                            {% elseif '<h5>' in action.NomAct %}
+                                <h5>{{ action.NomAct|replace({'<h5>':'','</h5>':''})}}</h5>
+                            {% elseif '<h6>' in action.NomAct %}
+                                <h6>{{ action.NomAct|replace({'<h6>':'','</h6>':''})}}</h6>
+                            {% endif %}
+                        {% else %}
+                            <p>{{ action.NomAct}}</p>
+                        {% endif %}
+                        {% if '<p>' in action.DescAct or '<i>' in action.DescAct or '<strong>' in action.DescAct or '<h1>' in action.DescAct or '<h2>' in action.DescAct or '<h3>' in action.DescAct or '<h4>' in action.DescAct or '<h5>' in action.DescAct or '<h6>' in action.DescAct%}
+                            {% if '<p>' in action.DescAct and not ('<i>' in action.DescAct or '<strong>' in action.DescAct or '<h1>' in action.DescAct or '<h2>' in action.DescAct or '<h3>' in action.DescAct or '<h4>' in action.DescAct or '<h5>' in action.DescAct or '<h6>' in action.DescAct)%}
+                                <p>{{ action.DescAct|replace({'<p>':'','</p>':''})}}</p>
+                            {% elseif '<strong>' in action.DescAct and '<i>' in action.DescAct %}
+                                <p><i><strong>{{ action.DescAct|replace({'<i>':'','</i>':'','<strong>':'','</strong>':'','<p>':'','</p>':''})}}</strong></i></p>
+                            {% elseif '<i>' in action.DescAct %}
+                                <p><i>{{ action.DescAct|replace({'<i>':'','</i>':'','<p>':'','</p>':''})}}</i></p>
+                            {% elseif '<strong>' in action.DescAct %}
+                                <p><strong>{{ action.DescAct|replace({'<strong>':'','</strong>':'','<p>':'','</p>':''})}}</strong></p>
+                            {% elseif '<h1>' in action.DescAct %}
+                                <h1>{{ action.DescAct|replace({'<h1>':'','</h1>':''})}}</h1>
+                            {% elseif '<h2>' in action.DescAct %}
+                                <h2>{{ action.DescAct|replace({'<h2>':'','</h2>':''})}}</h2>
+                            {% elseif '<h3>' in action.DescAct %}
+                                <h3>{{ action.DescAct|replace({'<h3>':'','</h3>':''})}}</h3>
+                            {% elseif '<h4>' in action.DescAct %}
+                                <h4>{{ action.DescAct|replace({'<h4>':'','</h4>':''})}}</h4>
+                            {% elseif '<h5>' in action.DescAct %}
+                                <h5>{{ action.DescAct|replace({'<h5>':'','</h5>':''})}}</h5>
+                            {% elseif '<h6>' in action.DescAct %}
+                                <h6>{{ action.DescAct|replace({'<h6>':'','</h6>':''})}}</h6>
+                            {% endif %}
+                        {% else %}
+                            <p>{{ action.DescAct}}</p>
+                        {% endif %}
+                    </div>
+                </a>
+                <!-- fonctionnaliter de suppression par un lien -->
+                    <a href="{{ path('supp_action', {'id': action.IdAct}) }}" class="o_del_link">
+                    <div class="offer_del">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                            <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                        </svg>
+                    </div>
+                </a>
+            </div>
+        <!-- lien pour retourner vers les membres -->
+            <div class="back_path">
+                <a href= {{ path('membreAffiche') }}>Retour</a>
+            </div>
     {% endfor %}
 </div>
 </body>
