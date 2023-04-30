@@ -18,13 +18,13 @@ class MembreType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('nom_membre', TextType::class,  [
+            ->add('nom_membre', HiddenType::class,  [
                 'label' => 'Nom',
                 'attr' => [
                     'placeholder' => "Nom du membre",
                 ],
             ])
-            ->add('desc_membre', TextareaType::class,  [
+            ->add('desc_membre', HiddenType::class,  [
                 'label' => 'Description',
                 'attr' => [
                     'placeholder' => "Description du membre",
@@ -37,7 +37,7 @@ class MembreType extends AbstractType
             ->add('fichier_id', HiddenType::class, [
                 'mapped' => false,
             ])
-            ->add('ajouter', SubmitType::class)
+            ->add('Ajouter', SubmitType::class)
         ;
     }
     public function configureOptions(OptionsResolver $resolver)
