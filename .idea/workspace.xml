@@ -100,6 +100,14 @@
       <path value="$PROJECT_DIR$/vendor/twbs/bootstrap-icons" />
       <path value="$PROJECT_DIR$/vendor/knplabs/knp-paginator-bundle" />
       <path value="$PROJECT_DIR$/vendor/knplabs/knp-components" />
+      <path value="$PROJECT_DIR$/vendor/symfony/mailer" />
+      <path value="$PROJECT_DIR$/vendor/egulias/email-validator" />
+      <path value="$PROJECT_DIR$/vendor/symfony/sendgrid-mailer" />
+      <path value="$PROJECT_DIR$/vendor/tijsverkoyen/css-to-inline-styles" />
+      <path value="$PROJECT_DIR$/vendor/twig/cssinliner-extra" />
+      <path value="$PROJECT_DIR$/vendor/symfony/css-selector" />
+      <path value="$PROJECT_DIR$/vendor/karser/karser-recaptcha3-bundle" />
+      <path value="$PROJECT_DIR$/vendor/google/recaptcha" />
     </include_path>
   </component>
   <component name="ProblemsViewState">
@@ -138,7 +146,11 @@
       <workItem from="1679410378156" duration="3473000" />
       <workItem from="1679840416661" duration="64000" />
       <workItem from="1679840618223" duration="2149000" />
-      <workItem from="1679899802323" duration="18671000" />
+      <workItem from="1679899802323" duration="19279000" />
+      <workItem from="1680252416811" duration="34509000" />
+      <workItem from="1680964210972" duration="9031000" />
+      <workItem from="1681580441081" duration="47083000" />
+      <workItem from="1682517956194" duration="29863000" />
     </task>
     <servers />
   </component>
