@@ -1,8 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{% endblock %}
+{% block title %}Formulaire de contact{% endblock %}
 
 {% block content_right %}
+    <!-- formulaire pour contacter ainsi que s'inscrire au newsletter -->
 <section id="formulate">
     {% for message in app.flashes('succesContact') %}
         <div class="flash-success">
@@ -14,7 +15,7 @@
             {{ message }}
         </div>
     {% endfor %}
-    <div class="container-fluid">
+    <div class="container-fluid form-control">
         {{ form_start(form)}}
         <div>
             {{ form_label(form.nom_cont) }}
@@ -23,7 +24,7 @@
                     {{ form_errors(form.nom_cont) }}
                 </div>
             {% endif %}
-            <div>{{ form_widget(form.nom_cont) }}</div>
+            <div class="">{{ form_widget(form.nom_cont) }}</div>
         </div>
         <div>
             {{ form_label(form.prenom_cont) }}
@@ -52,13 +53,11 @@
             {% endif %}
             <div>{{ form_widget(form.libelle_mess) }}</div>
         </div>
-        <div>{{ form_widget(form.inscription_cont) }}</div>
-        {% if form_errors(form.inscription_cont) %}
-            <div class="erreur">
-                {{ form_errors(form.inscription_cont) }}
-            </div>
-        {% endif %}
-        <button type="submit">envoyer</button>
+        <div>
+            {{ form_label(form.inscription_cont) }}
+            {{ form_widget(form.inscription_cont) }}
+        </div>
+        <button type="submit">Envoyer</button>
         {{ form_end(form) }}
     </div>
 </section>
