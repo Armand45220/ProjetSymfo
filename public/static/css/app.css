@@ -1,3 +1,4 @@
+
 /* MAIN */
 .main-flex{
     display: flex;
@@ -179,15 +180,15 @@ main {
 }
 
 .mt-3 {
-    margin-top: -8px !important;
+    margin-top: -8px!important;
 }
 
 .bg {
-    background-color: #191970 !important;
+    background-color: #191970!important;
 }
 
 nav {
-    padding: 0px !important;
+    padding: 0!important;
 }
 
 .nav-link {
@@ -223,7 +224,7 @@ nav {
     position: absolute;
     left: 112px;
     width: 187px;
-    bottom: 0px;
+    bottom: 0;
 }
 
 .nav-link:hover {
@@ -239,14 +240,13 @@ nav {
 }
 .navbar-nav {
     position: relative;
-    left: 0px!important;
+    left: 0!important;
 }
-
 /*a propos de nous*/
 #profilPose{
     width: 8rem;
     position: relative;
-    left: 5rem;
+    left: 7.5rem;
 }
 
 .titreCenter{
@@ -393,16 +393,6 @@ nav {
     margin-right: 5px;
 }  
 
-.actualiser{
-    display: flex;
-    justify-content: center;
-}
-
-.btnAct{
-    margin-top: 40px;;
-    background-color: darkblue;
-    color: white;
-}
 /* PAGE D'ACCUEIL */
 .homedesc{
     margin: 0 5% 0 5%;
@@ -447,7 +437,6 @@ nav {
     background-color: #191970;
     color: goldenrod;
     font-size: 20px;
-    bottom: 0px;
     position: fixed;
     bottom: 0;
     left: 50%;
@@ -502,7 +491,7 @@ nav {
 }
 
 /* Style pour le formulaire */
-.offer-form {
+.add-offer-form {
     margin-top: 50px;
     display: flex;
     flex-direction: column;
@@ -510,7 +499,7 @@ nav {
 }
 
 /* Style pour les champs de formulaire */
-.offer-form input[type="text"], .offer-form textarea {
+.add-offer-form input[type="text"], .add-offer-form textarea {
     width: 100%;
     padding: 10px;
     margin-bottom: 20px;
@@ -534,7 +523,6 @@ margin-right: 10px;
 display: flex;
 align-items: center;
 }
-
 
 
 #offrep_date_debut_val_date select, #offrep_date_debut_val_time select, #offrep_date_fin_val_date select, #offrep_date_fin_val_time select,
@@ -734,56 +722,7 @@ width: 470px;
     background-color: #ffffff;
     color: #000000;
 }
-
-/* CSS PAGE MENU OFFRE*/
-.button-offer-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-}
-
-/* Bouton */
-.button_lim, .button_perm {
-    display: block;
-    margin: auto;
-    text-align: center;
-    width: 70%;
-    height: 200px;
-    line-height: 60px;
-    font-size: 30px;
-    font-weight:lighter;
-    color: #000;
-    text-decoration: none;
-    background-color: #fff;
-    border: 1px solid #000;
-    cursor: pointer;
-    margin-bottom: 20px;
-
-}
-    
-.container_offer_menu{
-    margin-top:20vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.actualiserOffres{
-    margin-left: 50px;
-}
-
-/* Style des boutons au survol de la souris */
-.button_lim:hover, .button_perm:hover {
-    transition-duration: 0.5s;
-    background-color: #191970;
-    color: #FFD700;
-}
-
-/* Style des boutons en dessous de l'autre en version mobile */
-@media (max-width: 768px) {
-    .button_lim, .button_perm {
-    margin-bottom: 10px;
-    }
+/*contact*/
+#formulate{
+    height: 20em; position: absolute; left: 43em; top: 22em;
 }
