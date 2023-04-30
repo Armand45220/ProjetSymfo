@@ -1,0 +1,26 @@
+{% apply inline_css(source('@css/email.css')) %}
+    <html lang="fr">
+    <body>
+    <!-- message de la notiffication lors de l'inscription avec l'offre la plus recente -->
+    <p>
+        Bonjour <span>{{ user }}</span>,
+    </p>
+    <p>
+        Vous êtes inscrit à la newsletter de Saint Vincent, Senlis
+    </p>
+    {% if offre %}
+        <p>
+            Voici l'offre la plus récente : {{ offre.NomOffre }},
+        </p>
+    {% endif %}
+    <p>Cordialement, économat du Lycée Saint Vincent Senlis </p>
+    <footer>
+        <div>
+            <p>
+                Nous visiter sur <a href="https://www.lycee-stvincent.fr/" target="_blank">https://www.lycee.stvincent.fr/</a>
+            </p>
+        </div>
+    </footer>
+    </body>
+    </html>
+{% endapply %}

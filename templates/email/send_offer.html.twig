@@ -1,0 +1,21 @@
+{% apply inline_css(source('@css/email.css')) %}
+    <html lang="fr">
+    <body>
+    <!-- message de la notification d'une nouvelle offre -->
+    <p>
+        Bonjour <span>{{ user }}</span>,
+    </p>
+    <p>
+        Voici la nouvelle offre disponible : {{ offre.NomOffre }},
+    </p>
+    <p>Cordialement, économat du Lycée Saint Vincent Senlis </p>
+    <footer>
+        <div>
+            <p>
+                Nous visiter sur <a href="https://www.lycee-stvincent.fr/" target="_blank">https://www.lycee.stvincent.fr/</a>
+            </p>
+        </div>
+    </footer>
+    </body>
+    </html>
+{% endapply %}
