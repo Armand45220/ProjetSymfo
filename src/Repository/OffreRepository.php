@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Offre;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -37,63 +38,62 @@ class OffreRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
-    }   
+    }
 
-    //affichage offres permanentes
+    /**
+     * Récupère les offres les plus récents
+     * @return Offre[] Returns an array of Eleve objects
+     */
+    public function recentOffer(int $typeOffre, ?int $numAff): array
+    {
+        $query = $this->createQueryBuilder('of');
+        $query
+                ->andWhere('of.type_offre = :type')
+                ->setParameter('type', $typeOffre)
+                ->orderBy('of.id','ASC')
+        ;
 
-    public function affOffresPerm()
+        return $query->getQuery()->getResult();
+    }
+
+    /**
+     * Récupère l'offre la plus récente
+     * @param int $numOffre
+     * @return Offre|null Retourne l'Offre la plus récente
+     * @throws NonUniqueResultException
+     */
+    public function findMostRecentOffer(int $numOffre): ?Offre
     {
         return $this->createQueryBuilder('o')
-            ->select('o.date_insert_offre, o.nom_offre, o.desc_offre, o.date_debut_val, o.date_fin_val, o.nb_places_min, o.lien_offre')
-            ->where('o.type_offre = 1')
-            ->andWhere('o.num_aff != 0')
+            ->andWhere('o.id_offre = :val')
+            ->setParameter('val', $numOffre)
             ->getQuery()
-            ->getResult();
+            ->getOneOrNullResult()
+        ;
     }
 
-    // affichage offres limitées
+//    /**
+//     * @return Offre[] Returns an array of Offre objects
+//     */
+//    public function findByExampleField($value): array
+//    {
+//        return $this->createQueryBuilder('o')
+//            ->andWhere('o.exampleField = :val')
+//            ->setParameter('val', $value)
+//            ->orderBy('o.id', 'ASC')
+//            ->setMaxResults(10)
+//            ->getQuery()
+//            ->getResult()
+//        ;
+//    }
 
-    public function affOffresLim(){
-        return $this->createQueryBuilder('o')
-        ->select('o.date_insert_offre, o.nom_offre, o.desc_offre, o.date_debut_aff, o.date_fin_aff, o.lien_offre')
-        ->where('o.type_offre = 2')
-        ->andWhere('o.num_aff != 0')
-        ->orderBy('o.num_aff', 'ASC')
-        ->addOrderBy('o.id_offre', 'ASC')
-        ->getQuery()
-        ->getResult();
-    }
-
-    //actualisation des offres limitées 
-    public function actualiserOffresLim()
-    {
-        $dateActuelle = new \DateTime();
-
-        $offres = $this->findBy(['type_offre' => 2]);
-
-        foreach ($offres as $offre) {
-            if ($offre->getDateFinAff() < $dateActuelle) {
-                $offre->setNumAff(0);
-            }
-        }
-
-        $this->_em->flush();
-    }
-
-    //actualisation des offres limitées 
-    public function actualiserOffresPerm()
-    {
-        $dateActuelle = new \DateTime();
-
-        $offres = $this->findBy(['type_offre' => 1]);
-
-        foreach ($offres as $offre) {
-            if ($offre->getDateFinVal() < $dateActuelle) {
-                $offre->setNumAff(0);
-            }
-        }
-
-        $this->_em->flush();
-    }
-
+//    public function findOneBySomeField($value): ?Offre
+//    {
+//        return $this->createQueryBuilder('o')
+//            ->andWhere('o.exampleField = :val')
+//            ->setParameter('val', $value)
+//            ->getQuery()
+//            ->getOneOrNullResult()
+//        ;
+//    }
 }
