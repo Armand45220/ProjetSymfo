@@ -19,6 +19,7 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 
 class AProposController extends AbstractController
 {
+    //Récupération des informations du CSE telles que les membres, les actions, fichier et à propos
     #[Route('/APropos', name: 'app_apropos')]
     public function index(MembreRepository $membreRepository, ActionRepository $actionRepository, FichierRepository $fichierRepository, AProposRepository $AProposRepository): Response
     {

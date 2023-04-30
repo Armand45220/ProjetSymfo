@@ -6,6 +6,7 @@ use App\Form\NotificationType;
 use App\Repository\AccueilRepository;
 use App\Repository\OffreRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\NonUniqueResultException;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\HttpFoundation\Request;
@@ -27,10 +28,11 @@ class NotificationController extends AbstractController
 
     /**
      * @throws TransportExceptionInterface
+     * @throws NonUniqueResultException
      */
     #[Route('/inscription-newsletter', name: 'app_newsletter_registration')]
     public function subscribe(PaginatorInterface $paginator, AccueilRepository $accueilRepository,OffreRepository $offreRepository, Request $request, MailerInterface $mailer):Response{
-        $this->newsletterForm($mailer);
+        $this->newsletterForm($mailer, $offreRepository);
 
         $query = $this->entityManager->createQuery(
             'SELECT o.nom_offre, o.desc_offre, o.date_debut_aff, o.date_fin_aff, o.lien_offre
@@ -58,12 +60,14 @@ class NotificationController extends AbstractController
     }
 
     /**
-     * @throws TransportExceptionInterface
+     * @throws TransportExceptionInterface|NonUniqueResultException
      */
-    public function newsletterForm(MailerInterface $mailer):Response
+    public function newsletterForm(MailerInterface $mailer, OffreRepository $offreRepository):Response
     {
         // Créer une instance du formulaire
         $newletter =  new Notification() ;
+        $offreRecent = $offreRepository->findMostRecentOffer(count($offreRepository->findAll()));
+
         $notif =  $this->createForm(NotificationType::class, null, [
             'action' => $this->generateUrl('app_newsletter_registration'),
         ]);
@@ -83,7 +87,8 @@ class NotificationController extends AbstractController
                 ->subject('Votre newsletter')
                 ->htmlTemplate('email/send_newsletter.html.twig')
                 ->context([
-                    'user' => $newletter->getEmailNotif()
+                    'user' => $newletter->getEmailNotif(),
+                    'offre' => $offreRecent
                 ]);
                 /*Envoie d'un email*/
                 $mailer->send($email);

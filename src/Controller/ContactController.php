@@ -7,6 +7,7 @@ use App\Entity\MessUtilisateur;
 use App\Form\FormType;
 use App\Repository\ContactRepository;
 use App\Repository\MessUtilisateurRepository;
+use App\Repository\OffreRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Karser\Recaptcha3Bundle\Validator\Constraints\Recaptcha3Validator;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
@@ -23,10 +24,11 @@ class ContactController extends AbstractController
      * @throws TransportExceptionInterface
      */
     #[Route('/contact', name: 'app_contact')]
-    public function index(Request $request, EntityManagerInterface $entityManager,  MessUtilisateurRepository $messUtilisateurRepository, MailerInterface $mailer, Recaptcha3Validator $recaptcha3Validator): Response
+    public function index(Request $request, EntityManagerInterface $entityManager, OffreRepository $offreRepository, MailerInterface $mailer, Recaptcha3Validator $recaptcha3Validator): Response
     {
         $contact = new Contact();
         $message = new MessUtilisateur();
+        $offreRecent = $offreRepository->findMostRecentOffer(count($offreRepository->findAll()));
 
         $form = $this->createForm(FormType::class);
         $form->handleRequest($request);
@@ -56,7 +58,8 @@ class ContactController extends AbstractController
                         ->subject('Votre newsletter')
                         ->htmlTemplate('email/send_newsletter.html.twig')
                         ->context([
-                            'user' => $contact->getMailCont()
+                            'user' => $contact->getMailCont(),
+                            'offre' => $offreRecent
                         ]);
                     /*Envoie d'un email*/
                     $mailer->send($email);

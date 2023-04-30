@@ -13,12 +13,16 @@ use App\Form\MembreModifType;
 use App\Form\AProposModifType;
 use App\Repository\ActionRepository;
 use App\Repository\AProposRepository;
+use App\Repository\ContactRepository;
 use App\Repository\FichierRepository;
 use App\Repository\MembreRepository;
+use App\Repository\NotificationRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\AdminRepository;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use App\Entity\Offre;
@@ -51,7 +55,7 @@ class AdminController extends AbstractController
     //CONTROLLERS BACKOFFICE OFFRE
     #[Route("/admin/offre", name:"offre_adm")]
     
-    public function createOffre(Request $request) : Response
+    public function createOffre(Request $request, MailerInterface $mailer, ContactRepository $contactRepository, NotificationRepository $notificationRepository) : Response
     {
         $offre = new Offre();
         $form = $this->createForm(OffrepType::class, $offre);
@@ -61,7 +65,53 @@ class AdminController extends AbstractController
 
             // Si le 'num_aff' n'existe pas déjà, enregistrer la nouvelle offre
             $this->entityManager->persist($offre);
-            $this->entityManager->flush();  
+            $this->entityManager->flush();
+
+            //Initialisation des tableaux contacts et notifications
+            $contacts = [];
+            $notifications = [];
+
+            //Récupère les emails des personnes dans la table contact
+            foreach ($contactRepository->findAll() as $contact) {
+                if ($contact->getInscriptionCont() == 1) {
+                    $contacts[] = $contact->getMailCont();
+                }
+            }
+
+            //Récupère les emails des personnes dans la table notification
+            foreach ($notificationRepository->findAll() as $notification) {
+                //Récupère un email de la table contact
+                $contactFound = $contactRepository->findByEmailAndInscription($notification->getEmailNotif(),1);
+
+                //Vérifie si le contact n'existe pas pour envoyer l'email
+                if ($contactFound === null) {
+                    $notifications[] = $notification->getEmailNotif();
+                }
+            }
+
+            // Envoi de l'email des personnes dans la table contact
+            $email = (new TemplatedEmail())
+                ->from('cuisine.saintvincentsenlis@gmail.com')
+                ->to(...$contacts)
+                ->subject('Une nouvelle offre disponible')
+                ->htmlTemplate('email/send_offer.html.twig')
+                ->context([
+                    'offre' => $offre
+                ]);
+            /*Envoie d'un email*/
+            $mailer->send($email);
+
+            //Envoi de l'email des personnes dans la table notification
+            $email2 = (new TemplatedEmail())
+                ->from('cuisine.saintvincentsenlis@gmail.com')
+                ->to(...$notifications)
+                ->subject('Une nouvelle offre disponible')
+                ->htmlTemplate('email/send_offer.html.twig')
+                ->context([
+                    'offre' => $offre
+                ]);
+            /*Envoie d'un email*/
+            $mailer->send($email2);
 
             return $this->redirectToRoute('admin_lim');
         }
@@ -245,7 +295,7 @@ class AdminController extends AbstractController
     #[Route("/admin/afficheAPropos", name:"aProposAffiche")]
     public function aProposAffiche(AProposRepository $AProposRepository): Response
     {
-        return $this->render('admin/aPropos.html.twig', [
+        return $this->render('admin/aPropos-liste.html.twig', [
                 'infos_aPropos' => $AProposRepository->findAll()]
         );
     }
@@ -255,10 +305,22 @@ class AdminController extends AbstractController
     public function editAPropos(Request $request, EntityManagerInterface $em, int $id)
     {
         $propos = $em->getRepository(APropos::class)->find($id);
+        $oldEmail = $propos->getEmail();
+        $oldDescReglements = $propos->getDescReglements();
+
         $form = $this->createForm(AProposModifType::class, $propos);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+
+            if ($form->get('email')->getData() === null) {
+                $propos->setEmail($oldEmail);
+            }
+
+            if ($form->get('descReglements')->getData() === null) {
+                $propos->setDescReglements($oldDescReglements);
+            }
+
             $em->persist($propos);
             $em->flush();
 
@@ -333,11 +395,20 @@ class AdminController extends AbstractController
     public function editMembre(Request $request, EntityManagerInterface $em, int $id)
     {
         $membre = $em->getRepository(Membre::class)->find($id);
-
+        $oldNomMembre = $membre->getNomMembre();
+        $oldDescMembre = $membre->getDescMembre();
         $form = $this->createForm(MembreModifType::class, $membre);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            if ($form->get('nom_membre')->getData() === null) {
+                $membre->setNomMembre($oldNomMembre);
+            }
+
+            if ($form->get('desc_membre')->getData() === null) {
+                $membre->setDescMembre($oldDescMembre);
+            }
+
             $em->persist($membre);
             $em->flush();
 
@@ -377,7 +448,6 @@ class AdminController extends AbstractController
 
        if ($form->isSubmitted() && $form->isValid()) {
             $action
-
                ->setDescAct($form->get('desc_act')->getData())
                ;
                 $this->entityManager->persist($action);
@@ -404,11 +474,21 @@ class AdminController extends AbstractController
     public function editAction(Request $request, EntityManagerInterface $em, int $id)
     {
         $action = $em->getRepository(Action::class)->find($id);
+        $oldNomAction = $action->getNomAct();
+        $oldDescAction = $action->getDescAct();
 
         $form = $this->createForm(ActionModifType::class, $action);
-
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+
+            if ($form->get('nom_act')->getData() === null) {
+                $action->setNomAct($oldNomAction);
+            }
+
+            if ($form->get('desc_act')->getData() === null) {
+                $action->setDescAct($oldDescAction);
+            }
+
             $em->persist($action);
             $em->flush();
 
@@ -430,11 +510,6 @@ class AdminController extends AbstractController
 
         return $this->redirectToRoute('actionAffiche');
     }
-
-
-
-
-
 
 
 
@@ -469,5 +544,3 @@ class AdminController extends AbstractController
             ]);
         }
 }
-
-?>
