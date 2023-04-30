@@ -21,7 +21,7 @@ class Reponse
 
     #[ORM\ManyToOne(targetEntity:"App\Entity\Question", inversedBy:"Reponse")]
     #[ORM\JoinColumn(name:"id_question", referencedColumnName:"id_question")]
-    private $questions;
+    private $question;
 
     public function getId(): ?int
     {
@@ -54,12 +54,12 @@ class Reponse
 
     public function getQuestion(): ?Question
     {
-        return $this->questions;
+        return $this->question;
     }
 
-    public function setQuestion(?Question $questions): self
+    public function setQuestion(?Question $question): self
     {
-        $this->questions = $questions;
+        $this->question = $question;
 
         return $this;
     }

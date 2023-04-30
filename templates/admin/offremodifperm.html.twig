@@ -1,0 +1,16 @@
+{% extends 'basebo.html.twig' %}
+{% block body %}
+    {% include "admin/_flashes.html.twig" %}
+    <div class="offer-form">
+        {{ form_start(form) }}
+            <div class="offer-form">
+                {{ form_widget(form) }}
+            </div> 
+                <button id="btnSendOffer" class="btn">Enregistrer</button>
+        {{ form_end(form) }}
+    <a href="{{ path('aff_img_admin', {'id': offer.id}) }}">Afficher les images de l'offre</a>
+    </div>
+    <div class="back_path">
+        <a href= {{ path('admin_perm') }}>retour</a>
+    </div>
+{% endblock %}

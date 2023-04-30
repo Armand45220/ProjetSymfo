@@ -5,7 +5,6 @@ namespace App\Repository;
 
 use App\Entity\Admin;
 use App\Entity\Offre;
-
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Response;
@@ -50,26 +49,30 @@ class AdminRepository extends ServiceEntityRepository
 
     public function getOfferslAdmin()
     {
-        $type = 2;
-        $qb = $this->createQueryBuilder('o')
-            ->select('o.id_offre, o.nom_offre, o.desc_offre, o.lien_offre, o.date_debut_aff, o.date_fin_aff, o.num_aff')
-            ->where('o.type_offre = :type')
-            ->setParameter('type', $type);
-    
-        return $qb->getQuery()->getResult();
+        return $this->createQueryBuilder('o')
+        ->select('o.id_offre, o.date_insert_offre, o.nom_offre, o.desc_offre, o.date_debut_aff, o.date_fin_aff, o.num_aff, o.lien_offre, (
+            SELECT GROUP_CONCAT(f.cheminFichier SEPARATOR \',\')
+            FROM App\Entity\FichierOffre fo
+            JOIN fo.fichiers f
+            WHERE fo.offres = o.id_offre
+        ) AS fichiers')
+        ->orderBy('o.num_aff', 'ASC')
+        ->addOrderBy('o.id_offre', 'ASC')
+        ->where('o.type_offre = 2');
     }
 
-    
     public function getOfferspAdmin()
     {
-        $type = 1;
-        $qb = $this->createQueryBuilder('o')
-            ->select('o.id_offre, o.nom_offre, o.desc_offre, o.lien_offre, o.date_debut_val, o.date_fin_val, o.nb_places_min')
-            ->where('o.type_offre = :type')
-            ->setParameter('type', $type);
-    
-        return $qb->getQuery()->getResult();
+        return $this->createQueryBuilder('o')
+        ->select('o.id_offre, o.date_insert_offre, o.nom_offre, o.desc_offre, o.date_debut_val, o.date_fin_val, o.nb_places_min, o.lien_offre, (
+            SELECT GROUP_CONCAT(f.cheminFichier SEPARATOR \',\')
+            FROM App\Entity\FichierOffre fo
+            JOIN fo.fichiers f
+            WHERE fo.offres = o.id_offre
+        ) AS fichiers')
+        ->where('o.type_offre = 1');
     }
+    
 
 
 

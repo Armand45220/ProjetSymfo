@@ -1,0 +1,15 @@
+{% extends 'basebo.html.twig' %}
+{% block body %}
+    <h1 class="o_title">Nouvelle offre</h1>
+    <div class="offer-form">
+        {{ form_start(form) }}
+            <div class="offer-form">
+                {{ form_widget(form) }}
+            </div>
+                <button id="btnSendOffer" class="btn">Enregistrer</button>
+        {{ form_end(form) }}
+    </div>
+    <div class="back_path">
+        <a href= {{ path('offre_menu') }}>retour</a>
+    </div>
+{% endblock %}

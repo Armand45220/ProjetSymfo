@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\QuestionRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\Collection;
 
@@ -20,6 +21,14 @@ class Question
     
     #[ORM\OneToMany(mappedBy:"Reponse", targetEntity:'App\Entity\Reponse')]
     private $reponses;
+
+    #[ORM\Column(type: Types::SMALLINT)]
+    private ?int $dispo_question = null;
+
+    public function __toString()
+    {
+        return $this->txt_question;
+    }
 
     public function getId(): ?int
     {
@@ -41,6 +50,18 @@ class Question
     public function getReponses(): Collection
     {
         return $this->reponses;
+    }
+
+    public function getDispoQuestion(): ?int
+    {
+        return $this->dispo_question;
+    }
+
+    public function setDispoQuestion(int $dispo_question): self
+    {
+        $this->dispo_question = $dispo_question;
+
+        return $this;
     }
 }
 

@@ -2,7 +2,7 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid bg">
             <div class="w-100">
-                <img src="{{ asset('static/img/Logo_St_Vincent_1.png') }}" class="logo
+                <img src="{{ asset('static/img/logostvincent.png') }}" class="logo
             ms-4" width="60" alt="Logo st-vincent">
             </div>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02"
@@ -18,13 +18,13 @@
                         <a  href={{ path('app_partenaire')}} id="position2" class="nav-link position text-light">Partenariats</a>
                     </li>
                     <li class="nav-item">
-                        <a id="position3" class="longs nav-link position text-light">A propos de nous</a>
+                        <a href={{ path('app_apropos')}} id="position3" class="longs nav-link position text-light">A propos de nous</a>
                     </li>
                     <li class="nav-item">
                         <a href={{ path('offre')}} id="position4" class="nav-link position text-light">Billeterie</a>
                     </li>
                     <li class="nav-item">
-                        <a id="position" class="nav-link position text-light">Contact</a>
+                        <a href={{ path('app_contact')}} id="position" class="nav-link position text-light">Contact</a>
                     </li>
                 </ul>
             </div>

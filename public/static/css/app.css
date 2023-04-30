@@ -1,4 +1,3 @@
-
 /* MAIN */
 .main-flex{
     display: flex;
@@ -242,6 +241,7 @@ nav {
     position: relative;
     left: 0px!important;
 }
+
 /*a propos de nous*/
 #profilPose{
     width: 8rem;
@@ -393,6 +393,16 @@ nav {
     margin-right: 5px;
 }  
 
+.actualiser{
+    display: flex;
+    justify-content: center;
+}
+
+.btnAct{
+    margin-top: 40px;;
+    background-color: darkblue;
+    color: white;
+}
 /* PAGE D'ACCUEIL */
 .homedesc{
     margin: 0 5% 0 5%;
@@ -492,7 +502,7 @@ nav {
 }
 
 /* Style pour le formulaire */
-.add-offer-form {
+.offer-form {
     margin-top: 50px;
     display: flex;
     flex-direction: column;
@@ -500,7 +510,7 @@ nav {
 }
 
 /* Style pour les champs de formulaire */
-.add-offer-form input[type="text"], .add-offer-form textarea {
+.offer-form input[type="text"], .offer-form textarea {
     width: 100%;
     padding: 10px;
     margin-bottom: 20px;
@@ -538,8 +548,8 @@ margin-left: 10px;
 
 /* Style pour le bouton de soumission du formulaire */
 #btnSendOffer {
-    background-color: #4CAF50;
-    color: white;
+    background-color: #191970;
+    color: goldenrod;
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
@@ -724,3 +734,246 @@ width: 470px;
     background-color: #ffffff;
     color: #000000;
 }
+
+/* Partie image partenaire */
+
+
+.imgpartflex {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.imgp img {
+    height: auto;
+    display: block;
+}
+
+.btnmodifimgpart a {
+    display: inline-block;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.btnmodifimgpart a:hover {
+    background-color:#191970;
+    color: goldenrod;
+}
+
+.imgpForm {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f8f9fa;
+}
+/* CSS PAGE MENU OFFRE*/
+.button-offer-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+/* Bouton */
+.button_lim, .button_perm {
+    display: block;
+    margin: auto;
+    text-align: center;
+    width: 70%;
+    height: 200px;
+    line-height: 60px;
+    font-size: 30px;
+    font-weight:lighter;
+    color: #000;
+    text-decoration: none;
+    background-color: #fff;
+    border: 1px solid #000;
+    cursor: pointer;
+    margin-bottom: 20px;
+
+}
+    
+.container_offer_menu{
+    margin-top:20vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.actualiserOffres{
+    margin-left: 50px;
+}
+
+/* Style des boutons au survol de la souris */
+.button_lim:hover, .button_perm:hover {
+    transition-duration: 0.5s;
+    background-color: #191970;
+    color: #FFD700;
+}
+
+/* Style des boutons en dessous de l'autre en version mobile */
+@media (max-width: 768px) {
+    .button_lim, .button_perm {
+    margin-bottom: 10px;
+    }
+}
+
+.csrf-token {
+    display: none;
+}
+
+/* PARTIE IMAGES OFFRE */
+
+/* Style pour la liste d'images */
+.imgOflex {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* Style pour chaque image */
+.imgOflex img {
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+    margin: 1rem;
+    border: 1px solid #ccc;
+}
+
+/* Style pour les liens "Modifier" et "Supprimer" */
+.imgOlink a {
+    display: block;
+    margin-top: 0.5rem;
+    text-align: center;
+    text-decoration: none;
+    color: #333;
+    border: 1px solid #ccc;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+}
+
+.imgOlink a:hover {
+    background-color: #eee;
+}
+
+/* Style pour le lien "Ajouter un fichier" */
+.linkAjoutO {
+    margin-top: 2rem;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    background-color: #333;
+    border-radius: 5px;
+    padding: 1rem 2rem;
+}
+
+.linkAjoutOflex{
+    display: flex;
+    justify-content: center;
+}
+
+.linkAjoutO:hover {
+    background-color: #444;
+}
+
+/* Style pour le lien "Retour" */
+.linkRetour {
+    display: block;
+    margin-top: 2rem;
+    text-align: center;
+    text-decoration: none;
+    color: #333;
+    border: 1px solid #ccc;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+}
+
+.linkRetour:hover {
+    background-color: #eee;
+}
+
+/* Modif des images des offres */
+/* Style pour le formulaire */
+.omodifimg {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+/* Style pour le label et le champ de fichier */
+.omodifimg label, .omodifimg input[type="file"] {
+    display: block;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.omodifimg input[type="file"] {
+    border: 1px solid #ccc;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+}
+
+.modifOimg{
+    width: 100%;
+    height: 50px;
+    font-size: 20px;
+}
+
+.modifOimg:hover{
+    text-decoration: underline;
+    background-color: #191970;
+    color: goldenrod;
+}
+
+/* Style pour le formulaire d'ajout d'image */
+.ajoutOimgFlex {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.formAjoutOimg {
+    margin-bottom: 2rem;
+}
+
+/* Style pour le label et le champ de fichier */
+.formAjoutOimg label, .formAjoutOimg input[type="file"] {
+    display: block;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.formAjoutOimg input[type="file"] {
+    border: 1px solid #ccc;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+}
+
+/* Style pour le bouton "Ajouter" */
+.btnSub {
+    width: 100%;
+    height: 50px;
+    font-size: 20px;
+    margin-top: 15px;
+}
+
+.btnSub:hover {
+    text-decoration: underline;
+    background-color: #191970;
+    color: goldenrod;
+}
+
+

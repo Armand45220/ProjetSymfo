@@ -8,28 +8,20 @@
     <link href="{{ asset('static/css/app.css') }}" rel="stylesheet"/>
 </head>
 <body>
-    <div class="survey">
-            <div id="survey-head" class="survey-general">
-                <h2> Votre avis compte </h2>
-            </div>
-            <!-- champ de sélection -->
-            <div id="selection">
-                <fieldsetid  class="survey-general">
-                    <p id="font-center"> {{ question.txtQuestion }}</p>
-                    {% for reponse in reponses %}
-                        <div class="center">
-                            <input type="radio" id="option{{reponse.id}}" name="opt" value="option{{reponse.id}}">
-                            <label for="option">{{ reponse.libelleRep }}</label>
-                        </div>
-                    {% endfor %}
-                </fieldsetid>
-            </div>
-            <!-- bouton validation sondage -->
-            <div id="survey-validation" class="main-flex survey-general">
-                <div class="validate-answer">
-                    <button id="heightValidate" name="validate">Valider</button>
-                </div>
-            </div>
+<div class="survey">
+    <div id="survey-head" class="survey-general">
+        <h2>Votre avis compte</h2>
     </div>
+    <p> {{ question.txtQuestion}} </p>
+    {{ form_start(form) }}
+        <p>{{ form_widget(form.libelle_rep) }}</p>
+
+    <div id="survey-validation" class="main-flex survey-general">
+        <div class="validate-answer">
+            <button id="heightValidate" type="submit" name="validate">Valider</button>
+        </div>
+    </div>
+    {{ form_end(form) }}
+</div>
 </body>
 </html>

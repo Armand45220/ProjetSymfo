@@ -26,9 +26,9 @@ class Partenaire
     #[ORM\Column(length: 255)]
     private ?string $lienPart = null;
 
-    #[ORM\ManyToOne(targetEntity:"App\Entity\Fichier", inversedBy:"Partenaire")]
+    #[ORM\ManyToOne(targetEntity:"App\Entity\Fichier", inversedBy:"partenaires")]
     #[ORM\JoinColumn(name:"fichier_id", referencedColumnName:"id_fichier")]
-    private $fichierPart;
+    private ?Fichier $fichierPart = null;
 
     public function getId(): ?int
     {
@@ -59,7 +59,7 @@ class Partenaire
         return $this;
     }
 
-    public function getLienPart(): ?string
+    public function getLienPart(): ?string 
     {
         return $this->lienPart;
     }
@@ -71,12 +71,12 @@ class Partenaire
         return $this;
     }
     
-    public function getFichier(): ?Fichier
+    public function getFichierPart(): ?Fichier
     {
         return $this->fichierPart;
     }
 
-    public function setFichier(?Fichier $fichierPart): self
+    public function setFichierPart(?Fichier $fichierPart): self
     {
         $this->fichierPart = $fichierPart;
 

@@ -1,12 +1,6 @@
-<html>
-<head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1." />
-    <title>Ajout partenaire</title>
-    <link href="{{ asset('static/css/app.css') }}" rel="stylesheet"/>
-</head>
-<body>
+{% extends 'basebo.html.twig' %}
+{% block body %}
+    {% include "admin/_flashes.html.twig" %}
     <h1 class="title_bo">Ajouter un partenaire</h1>
     <div class="part_form">
         {{ form_start(form) }}
@@ -23,5 +17,4 @@
     <div class="back_path">
         <a href= {{ path('partList') }}>retour</a>
     </div>
-</body>
-</html>
+{% endblock %}

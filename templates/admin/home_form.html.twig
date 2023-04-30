@@ -1,14 +1,5 @@
-<html>
-<head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1." />
-    <title>Message page d'accueil</title>
-    <link href="{{ asset('static/css/app.css') }}" rel="stylesheet"/>
-
-</head>
-<body>
-
+{% extends 'basebo.html.twig' %}
+{% block body %}
     <h1 class="title_bo">Ajouter un message</h1>
     <div class="home_form"> 
         {{ form_start(form) }}
@@ -20,5 +11,4 @@
     <div class="back_path">
         <a href= {{ path('app_admin') }}>retour</a>
     </div>
-</body>
-</html>
+{% endblock %}

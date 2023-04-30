@@ -9,7 +9,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
 #[ORM\Entity(repositoryClass: OffreRepository::class)]
-class Offre
+class   Offre
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -37,17 +37,25 @@ class Offre
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $date_fin_aff = null;
 
+    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    private ?\DateTimeInterface $date_insert_offre = null;
+
     #[ORM\Column(nullable: true)]
     private ?int $num_aff = null;
 
-    #[ORM\OneToMany(targetEntity:"FichierOffre", mappedBy:"Offre")]
-    private $fichierOffre;
+    #[ORM\OneToMany(targetEntity:"FichierOffre", mappedBy:"offres", cascade:["persist"])]
+    private $fichiersOffres;
 
     #[ORM\Column(nullable: true)]
     private ?int $nb_places_min = null;
 
     #[ORM\Column(type: Types::SMALLINT)]
     private ?int $type_offre = null;
+
+    public function __construct()
+    {
+        $this->fichiersOffres = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -150,11 +158,6 @@ class Offre
         return $this;
     }
 
-    public function getFichierOffre(): Collection
-    {
-        return $this->fichierOffre;
-    }
-
     public function getNbPlacesMin(): ?int
     {
         return $this->nb_places_min;
@@ -179,4 +182,30 @@ class Offre
         return $this;
     }
 
+    public function getDateInsertOffre(): ?\DateTimeInterface
+    {
+        return $this->date_insert_offre;
+    }
+
+    public function setDateInsertOffre(\DateTimeInterface $date_insert_offre): self
+    {
+        $this->date_insert_offre = $date_insert_offre;
+
+        return $this;
+    }
+
+    public function getFichierOffre()
+    {
+        return $this->fichiersOffres;
+    }
+
+    public function addFichierOffre(FichierOffre $fichierOffre): self
+    {
+        if (!$this->fichiersOffres->contains($fichierOffre)) {
+            $this->fichiersOffres[] = $fichierOffre;
+            $fichierOffre->setOffre($this);
+        }
+
+        return $this;
+    }
 }

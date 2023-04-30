@@ -1,0 +1,21 @@
+{% extends 'basebo.html.twig' %}
+
+{% block body %}
+    {% include "admin/_flashes.html.twig" %}
+    <h1 class="title_bo">Fichiers liés à l'offre "{{ offre.nomOffre }}"</h1>
+    <div class="imgOflex">
+        {% for fichierOffre in fichiers %}
+            <img src="{{ asset(fichierOffre.fichier.cheminFichier) }}" alt="{{ fichierOffre.fichier.nomFichier }}">
+            <div class="imgOlink">
+                <a href="{{ path('modifier_img_admin', {id: offre.id, id_f: fichierOffre.id }) }}">Modifier</a>
+                <a href="{{ path('supprimer_fichier_offre', {id: offre.id, id_f: fichierOffre.id}) }}">Supprimer</a>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="linkAjoutOflex">
+        <a href="{{ path('ajouter_img_admin', {id: offre.id}) }}" class="linkAjoutO">Ajouter un fichier</a>
+    </div>
+    <div class="back_path">
+        <a href= {{ path('modif_offre_lim', {id:offre.id}) }}>retour</a>
+    </div>
+{% endblock %}

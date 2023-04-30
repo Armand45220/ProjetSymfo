@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Repository\OffreRepository;
+use App\Entity\Offre;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -13,22 +14,22 @@ use Knp\Component\Pager\PaginatorInterface;
 
 class OffreController extends AbstractController
 {
+    private $offreRepository;
     private $entityManager;
 
-    public function __construct(EntityManagerInterface $entityManager)
+
+    public function __construct(OffreRepository $offreRepository, EntityManagerInterface $entityManager)
     {
+        
+        $this->offreRepository = $offreRepository;
         $this->entityManager = $entityManager;
     }
+
     // Offre permanentes
-    #[Route(path: "/offre", name: "offre")]
-    public function offrePerm( PaginatorInterface $paginator, Request $request)
+    #[Route(path: "/offres-permanentes", name: "offre")]
+    public function offrePerm( PaginatorInterface $paginator, Request $request, OffreRepository $offreRepository)
     {
-        $query = $this->entityManager->createQuery(
-            'SELECT o.nom_offre, o.desc_offre, o.date_debut_val, o.date_fin_val, o.nb_places_min, o.lien_offre
-            FROM App\Entity\Offre o
-            WHERE o.type_offre = 1'
-        );
-        
+        $query = $offreRepository->affOffresPerm();
 
         $pagination = $paginator->paginate(
             $query,
@@ -40,21 +41,12 @@ class OffreController extends AbstractController
             'pagination' => $pagination
         ]);
     }
+
     // Offres limitées
-    #[Route(path: "offre/offreslimitées", name: "offresLim")]
-    public function offreLim(PaginatorInterface $paginator, Request $request)
+    #[Route(path: "offre/offres-limitées", name: "offresLim")]
+    public function offreLim(PaginatorInterface $paginator, Request $request, OffreRepository $offreRepository)
     {
-        $query = $this->entityManager->createQuery(
-            'SELECT o.nom_offre, o.desc_offre, o.date_debut_aff, o.date_fin_aff, o.lien_offre
-            FROM App\Entity\Offre o
-            WHERE o.type_offre = 2
-            ORDER BY 
-            CASE 
-            WHEN o.num_aff IS NOT NULL THEN o.num_aff
-            ELSE 99999999 
-            END'
-            
-        );
+        $query = $offreRepository->affOffresLim();
         
         $pagination = $paginator->paginate(
             $query,
@@ -66,4 +58,25 @@ class OffreController extends AbstractController
             'pagination' => $pagination
         ]);
     }
+
+    //actualisation des offres limitées
+    #[Route("/actualiser-offres-lim", name:"actualiser_lim")]
+    public function actualiserOffresL()
+    {
+        $this->offreRepository->actualiserOffresLim();
+
+        return $this->redirectToRoute('offresLim');
+    }
+
+    //actualisation des offres limitées
+    #[Route("/actualiser-offres-perm", name:"actualiser_perm")]
+    public function actualiserOffresP()
+    {
+        $this->offreRepository->actualiserOffresPerm();
+
+        return $this->redirectToRoute('offre');
+    }
+
+
+
 }

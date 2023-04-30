@@ -14,7 +14,9 @@ class HomeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('mess_pres_acc', TextareaType::class,)
+            ->add('mess_pres_acc', TextareaType::class, [
+                'label' => 'Message',
+            ])
             ->add('ajouter', SubmitType::class)
         ;
     }

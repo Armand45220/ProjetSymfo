@@ -1,0 +1,17 @@
+{% extends 'basebo.html.twig' %}
+
+{% block body %}
+    {% include "admin/_flashes.html.twig" %}
+    <h1 class="title_bo">{{ partenaire.nomPart }}</h1>
+    <div class="imgpartflex">
+        <div class="imgp">
+            <img src="{{ asset(partenaire.fichierPart.cheminFichier) }}" alt="{{ partenaire.nomPart }}" width="250">
+        </div>
+        <div class="btnmodifimgpart">
+            <a href="{{ path('partenaire_modif_image', {'id': partenaire.id}) }}">Modifier l'image</a>
+        </div>
+    </div>
+    <div class="back_path">
+        <a href="{{ path('modif_part', {'id': partenaire.id}) }}">Retour</a>
+    </div>
+{% endblock %}

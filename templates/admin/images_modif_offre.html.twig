@@ -1,0 +1,13 @@
+{% extends 'basebo.html.twig' %}
+{% block body %}
+    <h1 class="title_bo">Modifier un fichier de l'offre "{{ offre.nomOffre }}"</h1>   
+    <div class="omodifimg">
+        {{ form_start(form) }}
+            {{ form_widget(form.fichier) }}
+            <button type="submit" class="modifOimg">Enregistrer</button>
+        {{ form_end(form) }}
+    </div>
+    <div class="back_path">
+        <a href= {{ path('aff_img_admin', {id:offre.id}) }}>retour</a>
+    </div>
+{% endblock %}

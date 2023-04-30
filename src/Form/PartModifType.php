@@ -18,15 +18,14 @@ class PartModifType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nom_part', TextType::class)
-            ->add('desc_part', TextareaType::class)
-            ->add('lien_part', UrlType::class)
-            ->add('image', FileType::class, [
-                'mapped' => false,
-                'required' => true,
+            ->add('nom_part', TextType::class, [
+                'label' => 'Nom',
             ])
-            ->add('fichier_id', HiddenType::class, [
-                'mapped' => false,
+            ->add('desc_part', TextareaType::class, [
+                'label' => 'Description',
+            ])
+            ->add('lien_part', UrlType::class, [
+                'label' => 'Lien',
             ])
             ->add('modifier', SubmitType::class)
         ;

@@ -1,0 +1,18 @@
+{% extends 'basebo.html.twig' %}
+{% block body %}
+    {% include "admin/_flashes.html.twig" %}
+    <h1 class="title_bo">Modifier l'image du partenaire {{ partenaire.nomPart }}</h1>
+    <div class="imgpForm">
+        {{ form_start(form) }}
+        {{ form_errors(form) }}
+        <div class="form-group">
+            {{ form_label(form.image, 'Nouvelle image') }}
+            {{ form_widget(form.image, { 'attr': {'class': 'form-control'} }) }}
+        </div>
+        <button type="submit" class="btnSub">Modifier l'image</button>
+        {{ form_end(form) }}
+    </div>
+    <div class="back_path">
+        <a href="{{ path('img_partenaire', {'id': partenaire.id}) }}">Retour</a>
+    </div>
+{% endblock %}

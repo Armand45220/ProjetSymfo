@@ -1,8 +1,6 @@
 <section class="left-section">
     <!-- Sondage -->
-    {{ render(controller(
-                'App\\Controller\\QuestionController::showQuestionAction', {id:1}
-    )) }}
+    {{ render ( controller ('App\\Controller\\QuestionController::QuestionShow')) }}
 
     <!-- Accès rapide -->
     <div id="quick-access" class="padding survey-general">
