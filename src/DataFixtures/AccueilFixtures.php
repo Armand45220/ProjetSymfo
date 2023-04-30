@@ -21,5 +21,4 @@ class AccueilFixtures extends Fixture
         $manager->flush();
     }
 }
-
 ?>

@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Contact;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -38,6 +39,22 @@ class ContactRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+
+
+    /**
+     * @throws NonUniqueResultException
+     */
+    public function findByEmailAndInscription(string $email, bool $inscription): ?Contact
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.mail_cont = :email')
+            ->andWhere('c.inscription_cont = :ins')
+            ->setParameters(['email' => $email, 'ins' => $inscription])
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+
 
 //    /**
 //     * @return Contact[] Returns an array of Contact objects

@@ -1,27 +1,30 @@
 <div id="marginT-nav">&nbsp;</div>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid bg">
+            <!--logo de st-vincent-->
             <div class="w-100">
                 <img src="{{ asset('static/img/logostvincent.png') }}" class="logo
             ms-4" width="60" alt="Logo st-vincent">
             </div>
+            <!--bouton burger pour le responsive-->
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02"
                     aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+            <!-- liste de lien qui permet de naviguer sur les differentes page du site -->
             <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a  href={{ path('home')}} id="position1" class="nav-link position text-light">Accueil</a>
+                        <a href="{{ path('home')}}" id="position1" class="nav-link position text-light">Accueil</a>
                     </li>
                     <li class="nav-item">
-                        <a  href={{ path('app_partenaire')}} id="position2" class="nav-link position text-light">Partenariats</a>
+                        <a  href="{{ path('app_partenaire')}}" id="position2" class="nav-link position text-light">Partenariats</a>
                     </li>
                     <li class="nav-item">
                         <a href={{ path('app_apropos')}} id="position3" class="longs nav-link position text-light">A propos de nous</a>
                     </li>
                     <li class="nav-item">
-                        <a href={{ path('offre')}} id="position4" class="nav-link position text-light">Billeterie</a>
+                        <a href="{{ path('offre')}}" id="position4" class="nav-link position text-light">Billetterie</a>
                     </li>
                     <li class="nav-item">
                         <a href={{ path('app_contact')}} id="position" class="nav-link position text-light">Contact</a>

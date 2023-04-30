@@ -157,4 +157,3 @@ class OffrelType extends AbstractType
         ]);
     }
 }
-

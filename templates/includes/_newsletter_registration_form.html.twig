@@ -1,0 +1,13 @@
+<!-- formulaire pour enregistrer l'email des gens qui veulent des newsletters dans le footer -->
+<div class="input-footer">
+    {{ form_start(notification)}}
+    {{ form_label(notification.email_notif) }}
+    {% if form_errors(notification.email_notif) %}
+        <div class="erreur">
+            {{ form_errors(notification.email_notif) }}
+        </div>
+    {% endif %}
+    <div>{{ form_widget(notification.email_notif) }}</div>
+    <div>{{ form_widget(notification.submit) }}</div>
+    {{ form_end(notification) }}
+</div>

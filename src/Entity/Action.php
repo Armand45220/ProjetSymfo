@@ -31,7 +31,7 @@ class Action
         return $this->nom_act;
     }
 
-    public function setNomAct(string $nom_act): self
+    public function setNomAct(?string $nom_act): self
     {
         $this->nom_act = $nom_act;
 
@@ -43,7 +43,7 @@ class Action
         return $this->desc_act;
     }
 
-    public function setDescAct(string $desc_act): self
+    public function setDescAct(?string $desc_act): self
     {
         $this->desc_act = $desc_act;
 

@@ -14,10 +14,10 @@ class APropos
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $email = null;
 
-    #[ORM\Column(type: Types::TEXT)]
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $descReglements = null;
 
     public function getId(): ?int
@@ -30,7 +30,7 @@ class APropos
         return $this->email;
     }
 
-    public function setEmail(string $email): self
+    public function setEmail(?string $email): self
     {
         $this->email = $email;
 
@@ -42,7 +42,7 @@ class APropos
         return $this->descReglements;
     }
 
-    public function setDescReglements(string $descReglements): self
+    public function setDescReglements(?string $descReglements): self
     {
         $this->descReglements = $descReglements;
 

@@ -1,20 +1,64 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ContactController!{% endblock %}
+{% block title %}Formulaire de contact{% endblock %}
 
-{% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/decor/OneDrive/Bureau/ProjetSymfo/src/Controller/ContactController.php'|file_link(0) }}">src/Controller/ContactController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/decor/OneDrive/Bureau/ProjetSymfo/templates/contact/index.html.twig'|file_link(0) }}">templates/contact/index.html.twig</a></code></li>
-    </ul>
-</div>
+{% block content_right %}
+    <!-- formulaire pour contacter ainsi que s'inscrire au newsletter -->
+<section id="formulate">
+    {% for message in app.flashes('succesContact') %}
+        <div class="flash-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+    {% for message in app.flashes('erreurContact') %}
+        <div class="flash-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+    <div class="container-fluid form-control">
+        {{ form_start(form)}}
+        <div>
+            {{ form_label(form.nom_cont) }}
+            {% if form_errors(form.nom_cont) %}
+                <div class="erreur">
+                    {{ form_errors(form.nom_cont) }}
+                </div>
+            {% endif %}
+            <div class="">{{ form_widget(form.nom_cont) }}</div>
+        </div>
+        <div>
+            {{ form_label(form.prenom_cont) }}
+            {% if form_errors(form.prenom_cont) %}
+                <div class="erreur">
+                    {{ form_errors(form.prenom_cont) }}
+                </div>
+            {% endif %}
+            <div>{{ form_widget(form.prenom_cont) }}</div>
+        </div>
+        <div>
+            {{ form_label(form.email_cont) }}
+            {% if form_errors(form.email_cont) %}
+                <div class="erreur">
+                    {{ form_errors(form.email_cont) }}
+                </div>
+            {% endif %}
+            <div>{{ form_widget(form.email_cont) }}</div>
+        </div>
+        <div>
+            {{ form_label(form.libelle_mess) }}
+            {% if form_errors(form.libelle_mess) %}
+                <div class="erreur">
+                    {{ form_errors(form.libelle_mess) }}
+                </div>
+            {% endif %}
+            <div>{{ form_widget(form.libelle_mess) }}</div>
+        </div>
+        <div>
+            {{ form_label(form.inscription_cont) }}
+            {{ form_widget(form.inscription_cont) }}
+        </div>
+        <button type="submit">Envoyer</button>
+        {{ form_end(form) }}
+    </div>
+</section>
 {% endblock %}

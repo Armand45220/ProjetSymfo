@@ -1,0 +1,34 @@
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1." />
+    <title>Ajout un propos</title>
+    <link href="{{ asset('static/css/app.css') }}" rel="stylesheet"/>
+</head>
+<body>
+<!-- formulaire pour ajouter un reglement ou un mail avec un hypertext de type balloon -->
+<h1 class="title_bo">Ajouter un propos</h1>
+<div id="part_form" style="margin-top: 50px;display: flex;flex-direction: column;align-items: center;">
+    {{ form_start(form) }}
+
+    <p>Email:</p>
+    {{ form_row(form.email) }}
+    <div id="editorProposEmail" style="border: solid 1px"></div>
+    <p>Description des règlements :</p>
+    {{ form_row(form.descReglements) }}
+    <div id="editorProposDescRegle" style="border: solid 1px"></div>
+
+
+    {{ form_end(form) }}
+</div>
+<div class="back_path">
+    <a href= {{ path('aProposAffiche') }}>Retour</a>
+</div>
+</body>
+<!-- les lien pour le formulaire en hypertext -->
+{% block javascripts %}
+    <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
+    <script src="{{ asset('js/ckeditor.js') }}"></script>
+{% endblock %}
+</html>

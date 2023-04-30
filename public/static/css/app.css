@@ -179,15 +179,15 @@ main {
 }
 
 .mt-3 {
-    margin-top: -8px !important;
+    margin-top: -8px!important;
 }
 
 .bg {
-    background-color: #191970 !important;
+    background-color: #191970!important;
 }
 
 nav {
-    padding: 0px !important;
+    padding: 0!important;
 }
 
 .nav-link {
@@ -223,7 +223,7 @@ nav {
     position: absolute;
     left: 112px;
     width: 187px;
-    bottom: 0px;
+    bottom: 0;
 }
 
 .nav-link:hover {
@@ -239,14 +239,14 @@ nav {
 }
 .navbar-nav {
     position: relative;
-    left: 0px!important;
+    left: 0!important;
 }
 
 /*a propos de nous*/
 #profilPose{
     width: 8rem;
     position: relative;
-    left: 5rem;
+    left: 7.5rem;
 }
 
 .titreCenter{
@@ -447,7 +447,6 @@ nav {
     background-color: #191970;
     color: goldenrod;
     font-size: 20px;
-    bottom: 0px;
     position: fixed;
     bottom: 0;
     left: 50%;
@@ -534,7 +533,6 @@ margin-right: 10px;
 display: flex;
 align-items: center;
 }
-
 
 
 #offrep_date_debut_val_date select, #offrep_date_debut_val_time select, #offrep_date_fin_val_date select, #offrep_date_fin_val_time select,
@@ -733,6 +731,10 @@ width: 470px;
     width: 100%;
     background-color: #ffffff;
     color: #000000;
+}
+/*contact*/
+#formulate{
+    height: 20em; position: absolute; left: 43em; top: 22em;
 }
 
 /* Partie image partenaire */
@@ -976,4 +978,7 @@ width: 470px;
     color: goldenrod;
 }
 
-
+/*contact*/
+#formulate{
+    height: 20em; position: absolute; left: 43em; top: 22em;
+}

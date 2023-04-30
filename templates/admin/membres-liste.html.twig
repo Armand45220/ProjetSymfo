@@ -1,0 +1,91 @@
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1." />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <link href="{{ asset('static/css/app.css') }}" rel="stylesheet"/>
+</head>
+<body>
+<!-- lien pour aller vers l'ajout -->
+<h1 class="title_bo"> Liste des membres <a href= {{ path('membre_admin') }}> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-square" viewBox="0 0 16 16">
+            <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+        </svg> </a>
+</h1>
+<!-- lien pour aller vers les page des liste action et celui des mail et reglement(propos) -->
+<div>
+    <a href="{{ path('actionAffiche') }}"
+       class="btn btn-primary">
+        Liste des actions
+    </a>
+    <a href="{{ path('aProposAffiche') }}"
+       class="btn btn-primary">
+        Liste des propos
+    </a>
+</div>
+<div class="offer_list">
+    {% for membre in membres %}
+        <!-- affichage de base de donné sous forme de liste des menbres  m'y en base de donné avec une condition pour supprimer le visuel de balise genere par l'hypertext et avoir le vrai visuel pour les italic gras et heading -->
+        <div class="offer_select">
+            <!-- avec un lien pour aller vers sa modification -->
+            <a href="{{ path('modif_membre', {'id': membre.idMembre})}}" class="o_upd_link">
+                <div class="offer_link">
+                    {% if '<p>' in membre.NomMembre or '<i>' in membre.NomMembre or '<strong>' in membre.NomMembre  or '<h1>' in membre.NomMembre or '<h2>' in membre.NomMembre or '<h3>' in membre.NomMembre %}
+                        {% if '<p>' in membre.NomMembre and not ('<i>' in membre.NomMembre or '<strong>' in membre.NomMembre or '<h1>' in membre.NomMembre or '<h2>' in membre.NomMembre or '<h3>' in membre.NomMembre) %}
+                            <p>{{ membre.NomMembre|replace({'<p>':'','</p>':''})}}</p>
+                        {% elseif '<strong>' in membre.NomMembre and '<i>' in membre.NomMembre %}
+                            <p><i><strong>{{ membre.NomMembre|replace({'<i>':'','</i>':'','<strong>':'','</strong>':'','<p>':'','</p>':''})}}</strong></i></p>
+                        {% elseif '<i>' in membre.NomMembre %}
+                            <p><i>{{ membre.NomMembre|replace({'<i>':'','</i>':'','<p>':'','</p>':''})}}</i></p>
+                        {% elseif '<strong>' in membre.NomMembre %}
+                            <p><strong>{{ membre.NomMembre|replace({'<strong>':'','</strong>':'','<p>':'','</p>':''})}}</strong></p>
+                        {% elseif '<h1>' in membre.NomMembre %}
+                            <h1>{{ membre.NomMembre|replace({'<h1>':'','</h1>':''})}}</h1>
+                        {% elseif '<h2>' in membre.NomMembre %}
+                            <h2>{{ membre.NomMembre|replace({'<h2>':'','</h2>':''})}}</h2>
+                        {% elseif '<h3>' in membre.NomMembre %}
+                            <h3>{{ membre.NomMembre|replace({'<h3>':'','</h3>':''})}}</h3>
+                        {% endif %}
+                    {% else %}
+                        <p>{{ membre.NomMembre}}</p>
+                    {% endif %}
+                    {% if '<p>' in membre.DescMembre or '<i>' in membre.DescMembre or '<strong>' in membre.DescMembre or '<h1>' in membre.DescMembre or '<h2>' in membre.DescMembre or '<h3>' in membre.DescMembre %}
+                        {% if '<p>' in membre.DescMembre and not ('<i>' in membre.DescMembre or '<strong>' in membre.DescMembre or '<h1>' in membre.DescMembre or '<h2>' in membre.DescMembre or '<h3>' in membre.DescMembre)%}
+                            <p>{{ membre.DescMembre|replace({'<p>':'','</p>':''})}}</p>
+                        {% elseif '<strong>' in membre.DescMembre and '<i>' in membre.DescMembre %}
+                            <p><i><strong>{{ membre.DescMembre|replace({'<i>':'','</i>':'','<strong>':'','</strong>':'','<p>':'','</p>':''})}}</strong></i></p>
+                        {% elseif '<i>' in membre.DescMembre %}
+                            <p><i>{{ membre.DescMembre|replace({'<i>':'','</i>':'','<p>':'','</p>':''})}}</i></p>
+                        {% elseif '<strong>' in membre.DescMembre %}
+                            <p><strong>{{ membre.DescMembre|replace({'<strong>':'','</strong>':'','<p>':'','</p>':''})}}</strong></p>
+                        {% elseif '<h1>' in membre.DescMembre %}
+                            <h1>{{ membre.DescMembre|replace({'<h1>':'','</h1>':''})}}</h1>
+                        {% elseif '<h2>' in membre.DescMembre %}
+                            <h2>{{ membre.DescMembre|replace({'<h2>':'','</h2>':''})}}</h2>
+                        {% elseif '<h3>' in membre.DescMembre %}
+                            <h3>{{ membre.DescMembre|replace({'<h3>':'','</h3>':''})}}</h3>
+                        {% endif %}
+                    {% else %}
+                        <p>{{ membre.DescMembre}}</p>
+                    {% endif %}
+                    <p>{{ membre.fichier.cheminFichier }}</p>
+                </div>
+            </a>
+            <!-- fonctionnaliter de suppression par un lien -->
+            <a href="{{ path('supp_membre', {'id': membre.idMembre}) }}" class="o_del_link">
+                <div class="offer_del">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                        <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                    </svg>
+                </div>
+            </a>
+        </div>
+        <!-- lien pour retourner vers la page d'acceuil admin -->
+        <a href= {{ path('app_admin') }}><button class="logoutbutton"> RETOUR </button></a>
+    {% endfor %}
+</div>
+</body>
+</html>
