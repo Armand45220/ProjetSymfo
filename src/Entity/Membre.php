@@ -20,7 +20,6 @@ class Membre
     #[ORM\Column(length: 255)]
     private ?string $nom_membre = null;
 
-
     #[ORM\Column(type: Types::TEXT)]
     private ?string $desc_Membre = null;
 
@@ -39,7 +38,7 @@ class Membre
         return $this-> nom_membre;
     }
 
-    public function setNomMembre(string $nom_membre): self
+    public function setNomMembre(?string $nom_membre): self
     {
         $this->nom_membre = $nom_membre;
 
@@ -51,7 +50,7 @@ class Membre
         return $this->desc_Membre;
     }
 
-    public function setDescMembre(string $desc_Membre): self
+    public function setDescMembre(?string $desc_Membre): self
     {
         $this->desc_Membre = $desc_Membre;
 
