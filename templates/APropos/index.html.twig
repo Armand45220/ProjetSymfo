@@ -5,6 +5,7 @@
             <h2 class="titreCenter txtCenter">Notre équipe</h2>
             <div class="container">
                 <div class="row">
+                    <!-- partie de membre avec leur info et une image -->
                 {% for info_membre in infos_membre %}
                     <div class="col-xl-4 col-lg-4 col-md-6 respTelImg">
                         <img id="profilPose" src="{{ asset(info_membre.fichier.cheminFichier) }}" alt="profil">
@@ -15,6 +16,7 @@
                 </div>
             </div>
             <div>
+                <!-- visuel des actions  -->
                     <h3 class="titreCenter txtCenter">Actions menées par le CSE</h3>
                 <div>
                     {% for info_action in infos_action%}
@@ -23,6 +25,7 @@
                 </div>
             </div>
             <div>
+                <!-- visuel des reglements -->
                 <h3  class="titreCenter txtCenter"> Règlement du CSE </h3>
                 <div>
                     {% for info_aPropos in infos_aPropos%}
@@ -31,6 +34,7 @@
                 </div>
             </div>
             <div>
+                <!-- lien pour leur envoyer un mail -->
                 <h3  class="titreCenter txtCenter">Contacter le CSE</h3>
                 <div class="txtCenter">
                     {% for info_aPropos in infos_aPropos%}
