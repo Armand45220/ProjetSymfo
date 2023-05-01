@@ -2,11 +2,13 @@
 namespace App\Controller;
 
 use App\Repository\ContactRepository;
-use \App\Form\FormInscription;
+use App\Form\FormInscription;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use \Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+
+
 
 class InscriptionController extends AbstractController
 {

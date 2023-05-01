@@ -10,6 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class PartType extends AbstractType
@@ -38,6 +39,17 @@ class PartType extends AbstractType
             ->add('image', FileType::class, [
                 'mapped' => false,
                 'required' => true,
+                'constraints' => [
+                    new Assert\File([
+                        'maxSize' => '1024k',
+                        'mimeTypes' => [
+                            'application/pdf',
+                            'image/jpeg',
+                            'image/png',
+                        ],
+                        'mimeTypesMessage' => 'Veuillez télécharger un fichier PDF, JPEG ou PNG valide',
+                    ])
+                ],
             ])
             ->add('fichier_id', HiddenType::class, [
                 'mapped' => false,

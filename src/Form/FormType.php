@@ -20,15 +20,24 @@ class FormType extends AbstractType
     {
         $builder
             ->add('nom_cont',TextType::class,[
-                'attr' => ['style' => 'width: 30em;']
+                'label'    => 'Nom',
+                'required' => true,
+                'attr' => ['style' => 'width: 30em;'],
+            
             ])
             ->add('prenom_cont',TextType::class,[
+                'label'    => 'Prénom',
+                'required' => true,
                 'attr' => ['style' => 'width: 30em;']
             ])
             ->add('email_cont',EmailType::class,[
+                'label'    => 'Adresse mail',
+                'required' => true,
                 'attr' => ['style' => 'width: 30em;']
             ])
             ->add('libelle_mess',TextareaType::class,[
+                'label'    => 'Message',
+                'required' => true,
                 'attr' => ['style' => 'width: 30em;']
             ])
             ->add('inscription_cont', CheckboxType::class, [

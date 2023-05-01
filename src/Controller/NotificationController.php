@@ -26,10 +26,6 @@ class NotificationController extends AbstractController
     {
     }
 
-    /**
-     * @throws TransportExceptionInterface
-     * @throws NonUniqueResultException
-     */
     #[Route('/inscription-newsletter', name: 'app_newsletter_registration')]
     public function subscribe(PaginatorInterface $paginator, AccueilRepository $accueilRepository,OffreRepository $offreRepository, Request $request, MailerInterface $mailer):Response{
         $this->newsletterForm($mailer, $offreRepository);
@@ -59,9 +55,6 @@ class NotificationController extends AbstractController
             'pagination' => $pagination, 'mess' => $mess]);
     }
 
-    /**
-     * @throws TransportExceptionInterface|NonUniqueResultException
-     */
     public function newsletterForm(MailerInterface $mailer, OffreRepository $offreRepository):Response
     {
         // Créer une instance du formulaire

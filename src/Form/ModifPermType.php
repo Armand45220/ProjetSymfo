@@ -6,10 +6,9 @@ namespace App\Form;
 use App\Entity\Offre;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\UrlType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 
 
 
@@ -18,16 +17,12 @@ class ModifPermType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-        ->add('type_offre', ChoiceType::class, [
-            'choices' => [
-                'Offre permanente' => 1,
-            ],
-            'expanded' => true,
-            'multiple' => false,
+        ->add('type_offre', HiddenType::class, [
+            'label' => 'Type d\'offre',
+            'data' => 1,
             'attr' => [
-                'id' => 'type_offre',
-                'data-target' => '#permanent',
-            ]
+                'value' => 1,
+            ],
         ])
         ->add('nom_offre', null,[
             'label' => 'Nom',
@@ -35,7 +30,7 @@ class ModifPermType extends AbstractType
         ->add('desc_offre', null, [
             'label' => 'Description',
         ])
-        ->add('lien_offre', null, [
+        ->add('lien_offre', UrlType::class, [
             'label' => 'Lien',
         ])
 

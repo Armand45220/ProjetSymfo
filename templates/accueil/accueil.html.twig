@@ -7,34 +7,50 @@
             <p class="homedesc"> {{ message.messPresAcc }} </p>
         {% endfor %}
 {% for offre in pagination %}
-    <div class="offer_content">
-        <!-- Partie haute de la div -->
-        <div class="top_content_offer">
-            <div class="type_offer">
-                <p> Offre limitées </p>
-            </div> 
-            <div class="time_offer">
-                <p> Publiée le {{ offre.date_insert_offre.format('d-m-y')}} - Du {{ offre.date_debut_aff.format('d-m-Y') }} au {{offre.date_fin_aff.format('d-m-Y')}} </p>
+<div class="offer_content">
+            <!-- Partie haute de la div -->
+            <div class="top_content_offer">
+                <div class="type_offer">
+                    <p> Offre limitée </p>
+                </div> 
+                <div class="time_offer">
+                    <p> Publiée le {{ offre.date_insert_offre.format('d-m-y') }} - Du {{ offre.date_debut_aff.format('d-m-Y') }} au {{offre.date_fin_aff.format('d-m-Y')}} </p>
+                </div>
+            </div>
+            <!-- nom de l'offre -->
+            <div class="name_offer">
+                <h4> {{ offre.nom_offre }}</h4>
+            </div>
+            <div class="desc_offer">
+                <p>{{ offre.desc_offre }}</p><br/>
+                <p> Merci de vous rendre au bureau du CSE pour passer commande </p>
+            </div>
+            <!-- Partie basse de la div  -->
+            <div class="bottom_content_offer">
+                <div class="img_offer">
+                    <p> Catalogue: <a href="#" data-bs-toggle="modal" data-bs-target="#offre{{ offre.id_offre }}"> images </a>
+                </div>
+                <div class="link_offer">
+                    <a href = "{{offre.lien_offre}}" target="_blank"> > En savoir plus</a>
+                </div>
             </div>
         </div>
-        <!-- nom de l'offre -->
-        <div class="name_offer">
-            <h4> {{ offre.nom_offre }}</h4>
-        </div>
-        <div class="desc_offer">
-            <p>{{ offre.desc_offre }}</p><br/>
-            <p> Merci de vous rendre au bureau du CSE pour passer commande </p>
-        </div>
-        <!-- Partie basse de la div  -->
-        <div class="bottom_content_offer">
-            <div class="img_offer">
-                <p> Catalogue: <a href=""> tarifs.pdf </a>
+        <!-- Modal -->
+        <div class="modal fade" id="offre{{ offre.id_offre }}" tabindex="-1" aria-labelledby="offre{{ offre.id_offre }}Label" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="offre{{ offre.id_offre }}Label">{{ offre.nom_offre }}</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        {% for fichier in offre.fichiers|split(',') %}
+                            <img src="{{ asset('uploads/' ~ fichier) }}" alt="Image" width="250"/>
+                        {% endfor %}
+                    </div>
+                </div>
             </div>
-            <div class="link_offer">
-                <a href = "{{offre.lien_offre}}" target="_blank"> > En savoir plus</a>
-            </div>
         </div>
-    </div>
 {% endfor %}
     {# afficher les liens de pagination #}
     <div class="pagination">

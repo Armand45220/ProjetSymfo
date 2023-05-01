@@ -8,6 +8,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -64,7 +65,7 @@ class OffrepType extends AbstractType
                 'class' => 'oFlex'
             ],
         ])
-        ->add('Lien_offre', null, [
+        ->add('Lien_offre', UrlType::class, [
             'label' => 'Lien',
             'constraints' => [
                 new Assert\NotBlank([

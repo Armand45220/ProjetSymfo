@@ -20,12 +20,14 @@ class MembreType extends AbstractType
         $builder
             ->add('nom_membre', HiddenType::class,  [
                 'label' => 'Nom',
+                'required' => true,
                 'attr' => [
                     'placeholder' => "Nom du membre",
                 ],
             ])
             ->add('desc_membre', HiddenType::class,  [
                 'label' => 'Description',
+                'required' => true,
                 'attr' => [
                     'placeholder' => "Description du membre",
                 ],

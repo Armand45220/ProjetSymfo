@@ -2,35 +2,26 @@
 
 namespace App\Controller;
 
+
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
+use Knp\Component\Pager\PaginatorInterface;
 use App\Entity\Action;
 use App\Entity\APropos;
 use App\Entity\Membre;
+use App\Entity\Offre;
+use App\Entity\Fichier;
+use App\Entity\Partenaire;
+use App\Entity\FichierOffre;
+use App\Entity\Accueil;
 use App\Form\ActionType;
 use App\Form\MembreType;
 use App\Form\AProposType;
 use App\Form\ActionModifType;
 use App\Form\MembreModifType;
 use App\Form\AProposModifType;
-use App\Repository\ActionRepository;
-use App\Repository\AProposRepository;
-use App\Repository\ContactRepository;
-use App\Repository\MembreRepository;
-use App\Repository\NotificationRepository;
-use Doctrine\ORM\EntityManagerInterface;
-use App\Repository\AdminRepository;
-use App\Repository\PartenaireRepository;
-use App\Repository\FichierOffreRepository;
-use App\Repository\FichierRepository;
-use Symfony\Bridge\Twig\Mime\TemplatedEmail;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Mailer\MailerInterface;
-use Symfony\Component\Routing\Annotation\Route;
-use App\Entity\Offre;
-use App\Entity\Fichier;
-use App\Entity\Partenaire;
-use App\Entity\FichierOffre;
-use App\Entity\Accueil;
 use App\Form\OffrepType;
 use App\Form\OffrelType;
 use App\Form\ModifLimType;
@@ -41,13 +32,17 @@ use App\Form\HomeType;
 use App\Form\FoAjoutType;
 use App\Form\PartType;
 use App\Form\PartModifImgType;
-use Exception;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Doctrine\ORM\EntityManager;
-use Knp\Component\Pager\PaginatorInterface;
-
-
+use App\Repository\ActionRepository;
+use App\Repository\AProposRepository;
+use App\Repository\ContactRepository;
+use App\Repository\MembreRepository;
+use App\Repository\NotificationRepository;
+use App\Repository\AdminRepository;
+use App\Repository\PartenaireRepository;
+use App\Repository\FichierOffreRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class AdminController extends AbstractController 
 {
@@ -655,6 +650,7 @@ public function supprimerFichierOffre(Request $request, int $id, int $id_f): Res
         return $this->redirectToRoute('partList');     
     }
     
+
     //Affichage des images des partenaires 
     #[Route("/admin/{id}/part_modif/image", name:"img_partenaire")]      
     public function imgPartenaire(int $id, PartenaireRepository $partenaireRepository)
@@ -740,7 +736,7 @@ public function supprimerFichierOffre(Request $request, int $id, int $id_f): Res
 
     //Modification de a propos de nous
     #[Route("/admin/{id}/aPropos_modif", name:"modif_aPropos")]
-    public function editAPropos(Request $request, EntityManagerInterface $em, int $id) : 
+    public function editAPropos(Request $request, EntityManagerInterface $em, int $id)
     {
         $propos = $em->getRepository(APropos::class)->find($id);
         $oldEmail = $propos->getEmail();

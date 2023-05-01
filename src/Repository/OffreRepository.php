@@ -75,6 +75,38 @@ class OffreRepository extends ServiceEntityRepository
             ->getResult();
     }
     
+    public function affOffresLimAccueil()
+    {
+        $query = $this->createQueryBuilder('o')
+        ->select('o.id_offre, o.date_insert_offre, o.nom_offre, o.desc_offre, o.date_debut_aff, o.date_fin_aff, o.num_aff, o.lien_offre, (
+            SELECT GROUP_CONCAT(f.cheminFichier SEPARATOR \',\')
+            FROM App\Entity\FichierOffre fo
+            JOIN fo.fichiers f
+            WHERE fo.offres = o.id_offre
+        ) AS fichiers')
+        ->where('o.type_offre = 2')
+        ->orderBy('o.num_aff', 'ASC');
+    
+        // Les 3 offres avec les plus gros ID d'offre de type 2
+        $query1 = clone $query;
+        $results1 = $query1->orderBy('o.id_offre', 'DESC')
+                        ->setMaxResults(3)
+                        ->getQuery()
+                        ->getResult();
+    
+        // Le reste des offres de type 2, en excluant les offres déjà affichées dans la première requête
+        $query2 = clone $query;
+        $query2->andWhere('o.id_offre NOT IN (:ids)')
+                ->setParameter('ids', array_map(function($offre) {
+                    return $offre['id_offre'];
+                }, $results1));
+        $results2 = $query2->orderBy('o.num_aff', 'ASC')
+                        ->getQuery()
+                        ->getResult();
+    
+        // On retourne les deux résultats combinés
+        return array_merge($results1, $results2);
+    }
 
     //actualisation des offres limitées 
     public function actualiserOffresLim()
@@ -107,5 +139,28 @@ class OffreRepository extends ServiceEntityRepository
 
         $this->_em->flush();
     }
+
+    public function recentOffer(int $typeOffre, ?int $numAff): array
+    {
+        $query = $this->createQueryBuilder('of');
+        $query
+                ->andWhere('of.type_offre = :type')
+                ->setParameter('type', $typeOffre)
+                ->orderBy('of.id','ASC')
+        ;
+
+        return $query->getQuery()->getResult();
+    }
+
+    public function findMostRecentOffer(int $numOffre): ?Offre
+    {
+        return $this->createQueryBuilder('o')
+            ->andWhere('o.id_offre = :val')
+            ->setParameter('val', $numOffre)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+
 
 }

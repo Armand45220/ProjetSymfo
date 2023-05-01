@@ -1,5 +1,6 @@
 {% extends 'basebo.html.twig' %}
 {% block body %}
+    {% include "admin/_flashes.html.twig" %}
     <h1 class="o_title">Nouvelle offre</h1>
     <div class="offer-form">
         {{ form_start(form) }}

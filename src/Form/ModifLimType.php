@@ -7,7 +7,9 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\UrlType;
+
 
 
 
@@ -17,17 +19,12 @@ class ModifLimType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-        ->add('type_offre', ChoiceType::class, [
-            'label' => 'Type',
-            'choices' => [
-                'Offre limitée' => 2,
-            ],
-            'expanded' => true,
-            'multiple' => false,
+        ->add('type_offre', HiddenType::class, [
+            'label' => 'Type d\'offre',
+            'data' => 2,
             'attr' => [
-                'id' => 'type_offre',
-                'data-target' => '#limite'
-            ]
+                'value' => 2,
+            ],
         ])
         ->add('nom_offre', null,[
             'label' => 'Nom',
@@ -35,7 +32,7 @@ class ModifLimType extends AbstractType
         ->add('desc_offre', null, [
             'label' => 'Description',
         ])
-        ->add('lien_offre', null, [
+        ->add('lien_offre', UrlType::class, [
             'label' => 'Lien',
         ])
 

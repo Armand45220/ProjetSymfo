@@ -13,7 +13,9 @@ class NotificationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
     $builder
-    ->add('email_notif', EmailType::class)
+    ->add('email_notif', EmailType::class,[
+        'label' => 'E-mail',
+    ])
     ->add('submit', SubmitType::class, ['label' => 'Envoyer'])
     ;
     }

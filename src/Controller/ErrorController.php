@@ -1,4 +1,4 @@
-<?php // src/Controller/ErrorController.php
+<?php 
 
 namespace App\Controller;
 

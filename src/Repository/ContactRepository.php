@@ -40,10 +40,6 @@ class ContactRepository extends ServiceEntityRepository
         }
     }
 
-
-    /**
-     * @throws NonUniqueResultException
-     */
     public function findByEmailAndInscription(string $email, bool $inscription): ?Contact
     {
         return $this->createQueryBuilder('c')
